@@ -1,157 +1,216 @@
-import React, { useRef, useState } from "react";
-import { Star, Play, Pause } from "lucide-react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
-const VIDEO_URL =
-  "https://res.cloudinary.com/q1vba78b/video/upload/v1783072122/Legacy_Award_Client_testimonial_Video_1_1_hu2wxn.mp4";
+const RAW_TESTIMONIALS = [
+  {
+    quote:
+      "I started my journey with FitMom Club in August 2025 and have seen fantastic results. Guidance from my diet coach Rachana and fitness coach Chandini was very helpful in reaching my target the healthy way. Still continuing with them to get even fitter!",
+    author: "Kavya Ramani, Lost 13kg",
+  },
+  {
+    quote:
+      "I reached out to FitMom Club because I wanted a structured, supportive space to focus on my fitness and well-being. The workouts are motivating, the coaching is personalized, and the community keeps me accountable in the best way.",
+    author: "Suchithra S, Lost 9.5kg",
+  },
+  {
+    quote:
+      "I can genuinely see and feel an amazing transformation in myself. My Diastasis Recti, which was 4 fingers earlier, has now been completely reduced, and my energy, stamina, and confidence have improved tremendously.",
+    author: "Naina Ghatge, Lost 4kg",
+  },
+  {
+    quote:
+      "Very happy with FitMom Club! I lost 4kg in just one month with workouts and a proper diet plan, and I also saw significant improvement in my diastasis recti. The workouts are effective, easy to follow, and well-guided.",
+    author: "Nidhi Suhane, Lost 4kg",
+  },
+  {
+    quote:
+      "Postpartum, I had no idea where to start. My coaches built a plan around my recovery, not against it. Six months in, my diastasis recti has closed up and I finally feel like myself again.",
+    author: "Meera Iyer, Lost 6kg",
+  },
+  {
+    quote:
+      "What I love most is that nobody made me feel guilty for slow weeks. The check-ins, the diet tweaks, the form corrections on every workout, it all added up. I am stronger now than I was before I had my baby.",
+    author: "Ananya Deshpande, Lost 7.5kg",
+  },
+  {
+    quote:
+      "Between night feeds and a toddler, I didn't think consistency was possible. FitMom Club made it simple. Clear weekly plans, a coach who actually replies, and results I can see in the mirror.",
+    author: "Priya Nair, Lost 5kg",
+  },
+];
 
-const Stars = () => (
-  <div className="flex gap-0.5">
-    {Array.from({ length: 5 }).map((_, i) => (
-      <Star key={i} size={14} className="fill-[#FBBF24] text-[#FBBF24]" />
-    ))}
-  </div>
-);
+const TESTIMONIALS = RAW_TESTIMONIALS.map(({ quote, author }) => {
+  const [name, result] = author.split(",").map((s) => s.trim());
+  const initials = name
+    .split(" ")
+    .map((w) => w[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+  return { quote, name, result, initials };
+});
 
-const Card = ({ name, role, quote, className = "" }) => (
-  <div
-    className={`bg-gray-100 rounded-2xl p-6 flex flex-col gap-4 ${className}`}
-  >
-    <div className="flex items-start justify-between gap-3">
-      <div>
-        <p className="text-sm font-semibold text-[#111213]">{name}</p>
-        <p className="text-xs text-[#9CA3AF]">{role}</p>
-      </div>
-      <Stars />
-    </div>
-    <p className="text-sm leading-relaxed text-[#6B7280]">{quote}</p>
-  </div>
-);
+function useItemsPerView() {
+  const [itemsPerView, setItemsPerView] = useState(3);
 
-const testimonials = {
-  left: [
-    {
-      name: "Kavya Ramani",
-      role: "Lost 13kg in 3 months.",
-      quote:
-        "I started my journey with fitmom club on August 2025... I have seen a fantastic results in my journey. And a guidance from my diet coach Rachana and fitness coach chandini are very helpful to reach my target in healthy way... My starting weight is 85.4kgs and present weight is 72.4kgs... Still I am continuing with them to get more fit.. Thankyou Fitmom club",
-    },
-    {
-      name: "Suchithra S",
-      role: "Lost 9.5kg",
-      quote:
-        "I reached out to FiTmomclub because I wanted a structured, supportive space to focus on my fitness and well-being. So far, my journey has been amazing. The workouts are motivating, the coaching is personalized, and the community keeps me accountable in the best way. I truly feel supported every step of the way. The changes I have noticed in myself have been both physical and emotional. I feel stronger, more energetic, and more confident, I was 100kgs today I am 91.5kgs."
-    },
-  ],
-  right: [
-    {
-      name: "Naina Ghatge",
-      role: "Lost 4kg in 2 months.",
-      quote:
-        "I can genuinely see and feel an amazing transformation in myself. My Diastasis Recti, which was 4 fingers earlier, has now been completely reduced. I have lost 4 kg in just 2 months, and my energy, stamina, and confidence have improved tremendously. One of the biggest changes for me is that my period pain has completely stopped, which has made a huge difference in my daily life. A heartfelt thank you to my dietitian Lavina Ma’am for such a simple, sustainable, and effective diet, and to my fit coach Dr. Bhanupriya Ma’am for the right workouts, guidance, and constant motivation.",
-    },
-    {
-      name: "Nidhi Suhane",
-      role: "Lost 4kg in 1 month.",
-      quote:
-        "Very happy with FitMom Club! I lost 4 kg in just one month with workouts and a proper diet plan, and I also saw significant improvement in my diastasis recti. The workouts are effective, easy to follow, and well-guided. Special thanks to Coach Mrs Ragala Amoolya and Dietitian Mrs Juveria Fatima for their constant support and guidance.",
-    },
-  ],
-};
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const update = () => setItemsPerView(mq.matches ? 3 : 1);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
-const VideoCard = () => {
-  const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  return itemsPerView;
+}
 
-  const togglePlay = () => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (video.paused) {
-      video.play();
-      setIsPlaying(true);
-    } else {
-      video.pause();
-      setIsPlaying(false);
-    }
+export default function TestimonialCarousel() {
+  const itemsPerView = useItemsPerView();
+  const maxIndex = Math.max(0, TESTIMONIALS.length - itemsPerView);
+  const [index, setIndex] = useState(0);
+  const dragState = useRef({ startX: 0, dragging: false, moved: 0 });
+  const trackRef = useRef(null);
+
+  useEffect(() => {
+    setIndex((i) => Math.min(i, maxIndex));
+  }, [maxIndex]);
+
+  const goTo = useCallback(
+    (i) => setIndex(Math.min(Math.max(i, 0), maxIndex)),
+    [maxIndex]
+  );
+  const next = useCallback(() => goTo(index + 1), [goTo, index]);
+  const prev = useCallback(() => goTo(index - 1), [goTo, index]);
+
+  const onPointerDown = (e) => {
+    dragState.current.startX = e.clientX ?? e.touches?.[0]?.clientX ?? 0;
+    dragState.current.dragging = true;
+    dragState.current.moved = 0;
   };
 
+  const onPointerMove = (e) => {
+    if (!dragState.current.dragging) return;
+    const x = e.clientX ?? e.touches?.[0]?.clientX ?? 0;
+    dragState.current.moved = x - dragState.current.startX;
+  };
+
+  const endDrag = () => {
+    if (!dragState.current.dragging) return;
+    const moved = dragState.current.moved;
+    dragState.current.dragging = false;
+    dragState.current.moved = 0;
+    const threshold = 60;
+    if (moved < -threshold) next();
+    else if (moved > threshold) prev();
+  };
+
+  const cardWidth = 100 / itemsPerView;
+  const trackOffset = index * cardWidth;
+
   return (
-    <div className="relative bg-[#1A1B1E] rounded-2xl overflow-hidden aspect-[9/16] flex flex-col justify-end p-6">
-      <video
-        ref={videoRef}
-        src={VIDEO_URL}
-        className="absolute inset-0 h-full w-full object-cover"
-        playsInline
-        loop
-        muted
-        onClick={togglePlay}
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
-      />
-
-      {/* dark gradient so the caption stays legible over the video */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none" />
-
-      <button
-        aria-label={isPlaying ? "Pause testimonial video" : "Play testimonial video"}
-        onClick={togglePlay}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-14 w-14 rounded-full bg-white/90 flex items-center justify-center hover:bg-white transition-colors"
-      >
-        {isPlaying ? (
-          <Pause size={20} className="text-[#111213]" fill="currentColor" />
-        ) : (
-          <Play size={20} className="text-[#111213] ml-0.5" fill="currentColor" />
-        )}
-      </button>
-
-      <div className="relative">
-        <p className="text-white text-lg italic" style={{ fontFamily: "'Sora', sans-serif" }}>
-          Richi Sharma
-        </p>
-        <p className="text-white/70 text-sm">Lost 14 kg</p>
-      </div>
-    </div>
-  );
-};
-
-export default function TestimonialSection() {
-  return (
-    <section className=" py-16 sm:py-20 px-4 sm:px-6 ">
+    <section className="w-full bg-white py-16 px-4 sm:px-8">
       <div className="mx-auto max-w-6xl">
-        {/* Badge */}
-        <span
-          className="inline-block text-xs font-medium text-[#4B5563] bg-white border border-[#E5E7EB] rounded-full px-3 py-1 mb-5"
-        >
-          Testimonial
-        </span>
+        {/* Header */}
+        <div className="mb-12 text-center">
+          <span className="inline-block text-xs font-semibold tracking-[0.2em] text-teal-800 uppercase">
+            Transformation Stories
+          </span>
+          <h2 className="mt-3 font-serif text-3xl sm:text-4xl text-slate-900">
+            Real Moms, Real Results
+          </h2>
+          <p className="mt-3 text-slate-500 max-w-xl mx-auto">
+            Every journey here started the same way ours did &mdash; with one
+            small decision to begin.
+          </p>
+        </div>
 
-        {/* Heading */}
-        <h2
-          className="text-3xl sm:text-4xl md:text-[2.75rem] leading-tight text-[#111213] mb-12 max-w-xl"
-          style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700 }}
-        >
-          Our Wall of Love — Words from Happy Clients
-        </h2>
+        {/* Carousel */}
+        <div className="relative">
+          <div
+            className="overflow-hidden select-none"
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={endDrag}
+            onPointerLeave={endDrag}
+            onTouchStart={onPointerDown}
+            onTouchMove={onPointerMove}
+            onTouchEnd={endDrag}
+          >
+            <div
+              ref={trackRef}
+              className="flex transition-transform duration-500 ease-out"
+              style={{ transform: `translateX(-${trackOffset}%)` }}
+            >
+              {TESTIMONIALS.map((t, i) => (
+                <div
+                  key={i}
+                  className="shrink-0 px-3"
+                  style={{ width: `${cardWidth}%` }}
+                >
+                  <div className="relative h-full flex flex-col rounded-2xl border border-slate-100 bg-white p-7 shadow-sm">
+                    <Quote
+                      className="absolute top-6 right-6 h-8 w-8 text-teal-50"
+                      strokeWidth={0}
+                      fill="currentColor"
+                    />
+                    <p className="relative font-serif text-[15px] leading-relaxed text-slate-700 flex-1">
+                      {t.quote}
+                    </p>
+                    <div className="mt-6 flex items-center gap-3 pt-5 border-t border-slate-100">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-teal-900 text-sm font-semibold text-white shrink-0">
+                        {t.initials}
+                      </div>
+                      <div className="min-w-0">
+                        <p className="font-medium text-slate-900 truncate">
+                          {t.name}
+                        </p>
+                        <span className="inline-block mt-0.5 rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-medium text-teal-800">
+                          {t.result}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
 
-        {/* Grid */}
-        <div
-          className="grid gap-6 md:grid-cols-3"
-        >
-          {/* Left column */}
-          <div className="flex flex-col gap-6">
-            {testimonials.left.map((t, i) => (
-              <Card key={i} {...t} className="flex-1" />
+        {/* Dots + nav buttons */}
+        <div className="mt-8 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => goTo(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`h-1.5 rounded-full transition-all ${
+                  i === index ? "w-6 bg-teal-900" : "w-1.5 bg-slate-200"
+                }`}
+              />
             ))}
           </div>
 
-          <div className="flex flex-col gap-6">
-            <VideoCard />
-          </div>
-
-          {/* Right column */}
-          <div className="flex flex-col gap-6">
-            {testimonials.right.map((t, i) => (
-              <Card key={i} {...t} className="flex-1" />
-            ))}
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={prev}
+              disabled={index === 0}
+              aria-label="Previous testimonials"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white border border-slate-200 text-teal-900 shadow-sm hover:bg-teal-900 hover:text-white hover:border-teal-900 transition-colors disabled:opacity-30 disabled:pointer-events-none"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              onClick={next}
+              disabled={index === maxIndex}
+              aria-label="Next testimonials"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white border border-slate-200 text-teal-900 shadow-sm hover:bg-teal-900 hover:text-white hover:border-teal-900 transition-colors disabled:opacity-30 disabled:pointer-events-none"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
           </div>
         </div>
       </div>
