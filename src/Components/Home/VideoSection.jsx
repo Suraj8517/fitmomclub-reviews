@@ -11,8 +11,8 @@ const cardVideo4="https://res.cloudinary.com/q1vba78b/video/upload/v1783062401/T
 const CARDS = [
   {
     span: "col-span-6 sm:col-span-3",
-    title: "Abstract Data Display",
-    author: "Rudi Wibowo",
+    title: "FitMom Club Member's Journey",
+    author: "FitMom Club Member",
     videoSrc: cardVideo1,
     poster: "",
     titlePosition: "bottom",
@@ -20,8 +20,8 @@ const CARDS = [
   },
   {
     span: "col-span-6 sm:col-span-3",
-    title: "Minimalist Geometric Composition",
-    author: "Ilham Fahmi",
+    title: "17.6 kg down in 6 months",
+    author: "FitMom Club Member",
     videoSrc: cardVideo2,
     poster: "",
     titlePosition: "top",
@@ -29,8 +29,8 @@ const CARDS = [
   },
   {
     span: "col-span-6 sm:col-span-3",
-    title: "Abstract 3D Illustration",
-    author: "Nina Lestari",
+    title: "Lost 5kg in 3 months",
+    author: "FitMom Club Member",
     videoSrc: cardVideo3,
     poster: "",
     titlePosition: "bottom",
@@ -38,8 +38,8 @@ const CARDS = [
   },
   {
     span: "col-span-6 sm:col-span-3",
-    title: "Motion Study in Color",
-    author: "Sari Dewanti",
+    title: "Lost 10kg ",
+    author: "FitMom Club Member",
     videoSrc: cardVideo4,
     poster: "",
     titlePosition: "top",
@@ -109,15 +109,7 @@ function MediaCard({ card }) {
           <p className="text-white font-medium leading-snug">{card.title}</p>
           <p className="text-white/70 text-sm mt-0.5">{card.author}</p>
         </div>
-        {card.buttonPosition.includes("top") && <ArrowButton />}
       </div>
-
-      {/* Bottom-right button (when not already placed with title) */}
-      {card.buttonPosition === "bottom-right" && (
-        <div className="absolute bottom-6 right-5">
-          <ArrowButton />
-        </div>
-      )}
     </div>
   );
 }

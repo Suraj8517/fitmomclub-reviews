@@ -79,17 +79,17 @@ export default function Hero() {
       className="relative w-full bg-white min-h-screen py-6  px-6 sm:px-10 lg:px-16"
     >
 
-      <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-20 items-center">
+      <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-20 items-center mt-2 z-100">
         {/* Left: copy */}
         <div>
-          <div className="flex items-center gap-2.5 mb-6">
+          <div className="flex items-center gap-2.5 mb-2 mt-6 pt-10 ">
             <span className="w-6 h-px bg-emerald-800" />
             <span className="text-sm font-semibold tracking-wide text-emerald-800 uppercase">
               Verified member outcomes!
             </span>
           </div>
 
-          <h1 className="text-6xl sm:text-7xl leading-[1.03] font-medium tracking-tight text-slate-900">
+          <h1 className="text-6xl 2xl:text-7xl leading-[1.03] font-medium tracking-tight text-slate-900">
             Real health.
             <br />
             Real women.
@@ -151,14 +151,13 @@ export default function Hero() {
         </div>
 {/* Right: cropped/zoomed image, showing head to hips */}
 <div className="flex justify-center lg:justify-end">
-  <div className="w-full max-w-3xl h-screen ">
+  <div className="w-full max-w-3xl h-screen relative">
     <img
       src={heroimg1}
       alt="FitMom Club member"
       className="w-full h-full object-cover"
     />
-          <div className="z-10 pointer-events-none absolute inset-x-0 bottom-0 h-40 lg:h-76 bg-gradient-to-b from-transparent to-white" />
-
+    <div className="z-10 pointer-events-none absolute inset-x-0 bottom-0 h-40 lg:h-76 bg-gradient-to-b from-transparent to-white" />
   </div>
 </div>
         {/* Right: asymmetric image grid 
