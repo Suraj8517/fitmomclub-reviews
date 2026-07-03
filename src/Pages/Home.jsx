@@ -3,6 +3,7 @@ import Hero from '../Components/Home/Hero'
 import VideoSection from '../Components/Home/VideoSection'
 import TransformSection from '../Components/Home/TestimonialImages'
 import StatsSection from '../Components/Home/StatSection'
+import TestimonialSection from '../Components/Home/TestimonialSection'
 export default function Home() {
   return (
     <div>
@@ -10,6 +11,7 @@ export default function Home() {
         <StatsSection/>
         <VideoSection/>
         <TransformSection/>
+        <TestimonialSection/>
     </div>
   )
 }
