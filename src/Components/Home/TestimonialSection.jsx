@@ -1,5 +1,12 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Quote,
+  ShieldCheck,
+  Star,
+  PenLine,
+} from "lucide-react";
 
 const RAW_TESTIMONIALS = [
   {
@@ -49,6 +56,20 @@ const TESTIMONIALS = RAW_TESTIMONIALS.map(({ quote, author }) => {
     .toUpperCase();
   return { quote, name, result, initials };
 });
+
+const STATS = [
+  { value: "3.3", label: "App Store" },
+  { value: "4.7", label: "Google Play" },
+  { value: "4.7", label: "Google" },
+];
+
+const RATING_BREAKDOWN = [
+  { stars: 5, percent: 82 },
+  { stars: 4, percent: 11 },
+  { stars: 3, percent: 4 },
+  { stars: 2, percent: 2 },
+  { stars: 1, percent: 1 },
+];
 
 function useItemsPerView() {
   const [itemsPerView, setItemsPerView] = useState(3);
@@ -110,18 +131,78 @@ export default function TestimonialCarousel() {
   return (
     <section className="w-full bg-white py-16 px-4 sm:px-8">
       <div className="mx-auto max-w-6xl">
-        {/* Header */}
-        <div className="mb-12 text-center">
-          <span className="inline-block text-xs font-semibold tracking-[0.2em] text-teal-800 uppercase">
-            Transformation Stories
+        {/* Hero */}
+        <div className="mb-6 px-6 py-12 sm:px-12 text-center">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-100 px-3.5 py-1.5 text-xs font-semibold text-teal-800">
+            <ShieldCheck className="h-3.5 w-3.5" />
+            Verified member reviews
           </span>
-          <h2 className="mt-3 font-serif text-3xl sm:text-4xl text-slate-900">
-            Real Moms, Real Results
+
+          <h2 className="mt-5 font-serif text-3xl sm:text-4xl text-slate-900">
+            Real results from real women
           </h2>
-          <p className="mt-3 text-slate-500 max-w-xl mx-auto">
-            Every journey here started the same way ours did &mdash; with one
-            small decision to begin.
+
+          <p className="mt-4 text-slate-500 max-w-xl mx-auto leading-relaxed">
+            Over 1,00,000 women across India and worldwide have transformed
+            their health with FitMom Club. Read what they have to say.
           </p>
+
+          <div className="mt-9 flex flex-wrap items-start justify-center gap-x-10 gap-y-6 sm:gap-x-14">
+            {STATS.map((s) => (
+              <div key={s.label}>
+                <p className="font-serif text-2xl sm:text-3xl text-slate-900">
+                  {s.value}
+                </p>
+                <p className="mt-1 text-xs sm:text-sm text-slate-500">
+                  {s.label}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            className="mt-9 inline-flex items-center gap-2 rounded-full border border-teal-200 bg-white px-5 py-2.5 text-sm font-medium text-teal-800 shadow-sm hover:bg-teal-900 hover:text-white hover:border-teal-900 transition-colors"
+          >
+            <PenLine className="h-4 w-4" />
+            Share your story
+          </button>
+        </div>
+
+        {/* Rating summary */}
+        <div className="mb-12 mx-auto max-w-4xl grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-8 sm:gap-12 rounded-3xl border border-slate-100 bg-white px-6 py-8 sm:px-10">
+          <div className="flex sm:flex-col  items-center sm:items-start gap-4 sm:gap-2 sm:border-r sm:border-slate-100 sm:pr-12">
+            <p className="font-serif text-5xl text-slate-900">4.7</p>
+            <div>
+              <div className="flex gap-0.5 text-amber-400">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-4 w-4" fill="currentColor" strokeWidth={0} />
+                ))}
+              </div>
+              <p className="mt-1 text-sm text-slate-500 whitespace-nowrap">
+                Based on 2,400+ reviews
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-center gap-2.5">
+            {RATING_BREAKDOWN.map((r) => (
+              <div key={r.stars} className="flex items-center gap-3">
+                <span className="w-8 shrink-0 text-sm text-slate-500">
+                  {r.stars}&nbsp;&#9733;
+                </span>
+                <div className="h-1.5 flex-1 rounded-full bg-slate-100 overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-amber-400"
+                    style={{ width: `${r.percent}%` }}
+                  />
+                </div>
+                <span className="w-9 shrink-0 text-right text-sm text-slate-500">
+                  {r.percent}%
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Carousel */}
