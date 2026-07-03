@@ -1,5 +1,5 @@
 import React from "react";
-import heroimg1 from "../../assets/hero/11.png";
+import heroimg1 from "../../assets/hero/NEW.png";
 import heroimg2 from "../../assets/hero/hero2.jpg";
 import bgImage from "../../assets/hero/bg.webp";
 
@@ -76,9 +76,8 @@ function StatIcon({ type }) {
 export default function Hero() {
   return (
     <section
-      className="relative w-full bg-white min-h-screen py-16 lg:pt-42 px-6 sm:px-10 lg:px-16"
+      className="relative w-full bg-white min-h-screen py-6  px-6 sm:px-10 lg:px-16"
     >
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 lg:h-56 bg-gradient-to-b from-transparent to-white" />
 
       <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-20 items-center">
         {/* Left: copy */}
@@ -152,12 +151,14 @@ export default function Hero() {
         </div>
 {/* Right: cropped/zoomed image, showing head to hips */}
 <div className="flex justify-center lg:justify-end">
-  <div className="w-full max-w-2xl h-screen overflow-hidden">
+  <div className="w-full max-w-3xl h-screen ">
     <img
       src={heroimg1}
       alt="FitMom Club member"
-      className="w-full h-full object-cover object-top"
+      className="w-full h-full object-cover"
     />
+          <div className="z-10 pointer-events-none absolute inset-x-0 bottom-0 h-40 lg:h-76 bg-gradient-to-b from-transparent to-white" />
+
   </div>
 </div>
         {/* Right: asymmetric image grid 

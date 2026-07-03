@@ -1,34 +1,49 @@
 import React from "react";
 
+
+const cardVideo1="https://res.cloudinary.com/q1vba78b/video/upload/v1783062275/04-04-2026_Transformation__1080X1920_yxwger.mp4"
+const cardVideo2="https://res.cloudinary.com/q1vba78b/video/upload/v1783062271/AQMvXQbGWkouS2LYsfuxQyZ-q6QnIxzXL-bLMfIAU0w1e2aoamq3iXFnFxZ3BM71rpNWmG0VsagaoFZ2R5VAPwZ9MTR1_fnevNP97EE_skb5kx.mp4"
+const cardVideo3="https://res.cloudinary.com/q1vba78b/video/upload/v1783062396/TR_4_vb92li.mp4"
+const cardVideo4="https://res.cloudinary.com/q1vba78b/video/upload/v1783062401/TR_3_agpivc.mp4"
+
 // Swap these placeholders for your actual video files, e.g.:
 // import cardVideo1 from "../../assets/gallery/card1.mp4";
 const CARDS = [
   {
-    span: "col-span-12 sm:col-span-3",
+    span: "col-span-6 sm:col-span-3",
     title: "Abstract Data Display",
     author: "Rudi Wibowo",
-    videoSrc: "", // e.g. cardVideo1
+    videoSrc: cardVideo1,
     poster: "",
     titlePosition: "bottom",
     buttonPosition: "bottom-right",
   },
   {
-    span: "col-span-12 sm:col-span-6",
+    span: "col-span-6 sm:col-span-3",
     title: "Minimalist Geometric Composition",
     author: "Ilham Fahmi",
-    videoSrc: "", // e.g. cardVideo2
+    videoSrc: cardVideo2,
     poster: "",
     titlePosition: "top",
     buttonPosition: "top-right",
   },
   {
-    span: "col-span-12 sm:col-span-3",
+    span: "col-span-6 sm:col-span-3",
     title: "Abstract 3D Illustration",
     author: "Nina Lestari",
-    videoSrc: "", // e.g. cardVideo3
+    videoSrc: cardVideo3,
     poster: "",
     titlePosition: "bottom",
     buttonPosition: "bottom-right",
+  },
+  {
+    span: "col-span-6 sm:col-span-3",
+    title: "Motion Study in Color",
+    author: "Sari Dewanti",
+    videoSrc: cardVideo4,
+    poster: "",
+    titlePosition: "top",
+    buttonPosition: "top-right",
   },
 ];
 
@@ -65,9 +80,8 @@ function MediaCard({ card }) {
 
   return (
     <div
-      className={`${card.span} relative rounded-3xl overflow-hidden bg-slate-200 aspect-[4/5] sm:aspect-auto sm:h-[26rem]`}
+      className={`${card.span} relative rounded-3xl overflow-hidden bg-slate-200 aspect-[9/16]`}
     >
-      {/* Media: video if provided, otherwise a placeholder gradient */}
       {card.videoSrc ? (
         <video
           className="absolute inset-0 w-full h-full object-cover"
@@ -110,7 +124,7 @@ function MediaCard({ card }) {
 
 export default function VideoSection() {
   return (
-    <section className="w-full bg-white py-16 px-6 sm:px-10 lg:px-16">
+    <section className="w-full bg-white pt-36 px-6 sm:px-10 lg:px-16">
       <div className="max-w-7xl mx-auto">
         <div className="relative">
         
