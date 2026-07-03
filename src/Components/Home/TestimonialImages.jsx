@@ -134,25 +134,7 @@ export default function TransformationSection() {
       </div>
       
     </div>
-    <div
-  className="w-full h-44"
-  style={{
-    background: `
-      linear-gradient(
-        180deg,
-        #ffffff 0%,
-        rgba(255,255,255,0.98) 10%,
-        rgba(245,245,245,0.96) 22%,
-        rgba(225,225,225,0.92) 36%,
-        rgba(190,190,190,0.82) 50%,
-        rgba(130,130,130,0.68) 65%,
-        rgba(70,70,70,0.85) 80%,
-        rgba(25,25,25,0.96) 92%,
-        #0d0d0d 100%
-      )
-    `,
-  }}
-/>
+    
     </section>
   );
 }

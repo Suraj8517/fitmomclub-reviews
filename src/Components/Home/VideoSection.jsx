@@ -116,7 +116,7 @@ function MediaCard({ card }) {
 
 export default function VideoSection() {
   return (
-    <section className="w-full bg-white pt-36 px-6 sm:px-10 lg:px-16">
+    <section className="w-full bg-white pt-26 px-6 sm:px-10 lg:px-16">
       <div className="max-w-7xl mx-auto">
         <div className="relative">
         
@@ -126,7 +126,7 @@ export default function VideoSection() {
             <h1 className="text-5xl sm:text-6xl leading-[1.05] font-semibold tracking-tight text-slate-900">
               Short stories 
               <br />
-              from members
+              <span className="text-teal-700">from members</span>
             </h1>
 
             <div className="lg:pt-4 pl-22">

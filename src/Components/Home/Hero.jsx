@@ -106,7 +106,7 @@ export default function Hero() {
           <div className="mt-10 flex items-center gap-8 flex-wrap">
             <a
               href="#"
-              className="bg-emerald-950 hover:bg-emerald-900 transition-colors text-white text-base font-medium px-8 py-4 rounded-full"
+              className="bg-gradient-to-r from-teal-800 to-teal-600 hover:bg-gradient-to-r hover:from-emerald-900 hover:to-emerald-700 transition-colors text-white text-base font-medium px-8 py-4 rounded-full"
             >
               Start your journey
             </a>
