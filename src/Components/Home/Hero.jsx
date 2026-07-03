@@ -1,5 +1,5 @@
 import React from "react";
-import heroimg1 from "../../assets/hero/hero1.webp";
+import heroimg1 from "../../assets/hero/11.png";
 import heroimg2 from "../../assets/hero/hero2.jpg";
 import bgImage from "../../assets/hero/bg.webp";
 
@@ -76,8 +76,7 @@ function StatIcon({ type }) {
 export default function Hero() {
   return (
     <section
-      className="relative w-full bg-white min-h-screen py-16 lg:pt-42 px-6 sm:px-10 lg:px-16 bg-top"
-      style={{ backgroundImage: `url(${bgImage})`, backgroundSize: "cover" }}
+      className="relative w-full bg-white min-h-screen py-16 lg:pt-42 px-6 sm:px-10 lg:px-16"
     >
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 lg:h-56 bg-gradient-to-b from-transparent to-white" />
 
@@ -151,7 +150,16 @@ export default function Hero() {
           </div>
 
         </div>
-
+{/* Right: cropped/zoomed image, showing head to hips */}
+<div className="flex justify-center lg:justify-end">
+  <div className="w-full max-w-2xl h-screen overflow-hidden">
+    <img
+      src={heroimg1}
+      alt="FitMom Club member"
+      className="w-full h-full object-cover object-top"
+    />
+  </div>
+</div>
         {/* Right: asymmetric image grid 
         <div className="grid grid-cols-12 gap-5 auto-rows-[17rem] lg:auto-rows-[18rem]">
           {/* Member workout / transformation photo — wide 
