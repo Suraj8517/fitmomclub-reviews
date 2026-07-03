@@ -12,25 +12,14 @@ const Stars = () => (
   </div>
 );
 
-const Avatar = ({ seed }) => (
-  <img
-    src={`https://i.pravatar.cc/64?img=${seed}`}
-    alt=""
-    className="h-10 w-10 rounded-full object-cover flex-shrink-0"
-  />
-);
-
-const Card = ({ seed, name, role, quote, className = "" }) => (
+const Card = ({ name, role, quote, className = "" }) => (
   <div
     className={`bg-gray-100 rounded-2xl p-6 flex flex-col gap-4 ${className}`}
   >
     <div className="flex items-start justify-between gap-3">
-      <div className="flex items-center gap-3">
-        <Avatar seed={seed} />
-        <div>
-          <p className="text-sm font-semibold text-[#111213]">{name}</p>
-          <p className="text-xs text-[#9CA3AF]">{role}</p>
-        </div>
+      <div>
+        <p className="text-sm font-semibold text-[#111213]">{name}</p>
+        <p className="text-xs text-[#9CA3AF]">{role}</p>
       </div>
       <Stars />
     </div>
@@ -41,42 +30,32 @@ const Card = ({ seed, name, role, quote, className = "" }) => (
 const testimonials = {
   left: [
     {
-      seed: 12,
-      name: "Priya Nair",
-      role: "Serial Entrepreneur, Singapore",
+      name: "Kavya Ramani",
+      role: "Lost 13kg in 3 months.",
       quote:
-        "Setting up our landing page used to eat a whole sprint. With this kit it took an afternoon — the components just snap together.",
+        "I started my journey with fitmom club on August 2025... I have seen a fantastic results in my journey. And a guidance from my diet coach Rachana and fitness coach chandini are very helpful to reach my target in healthy way... My starting weight is 85.4kgs and present weight is 72.4kgs... Still I am continuing with them to get more fit.. Thankyou Fitmom club",
     },
     {
-      seed: 33,
-      name: "Dawid Kowalski",
-      role: "Fullstack Developer",
+      name: "Suchithra S",
+      role: "Lost 9.5kg",
       quote:
-        "The first impression is everything, and this library made ours look polished without hiring a designer. Genuinely hand-crafted, not generic.",
+        "I reached out to FiTmomclub because I wanted a structured, supportive space to focus on my fitness and well-being. So far, my journey has been amazing. The workouts are motivating, the coaching is personalized, and the community keeps me accountable in the best way. I truly feel supported every step of the way. The changes I have noticed in myself have been both physical and emotional. I feel stronger, more energetic, and more confident, I was 100kgs today I am 91.5kgs."
     },
   ],
   right: [
     {
-      seed: 47,
-      name: "Athar Rahman",
-      role: "Founder, ScopeOwl",
+      name: "Naina Ghatge",
+      role: "Lost 4kg in 2 months.",
       quote:
-        "I only want to touch the engineering side. Having a solid set of components ready means I can validate an idea without getting stuck on layout.",
+        "I can genuinely see and feel an amazing transformation in myself. My Diastasis Recti, which was 4 fingers earlier, has now been completely reduced. I have lost 4 kg in just 2 months, and my energy, stamina, and confidence have improved tremendously. One of the biggest changes for me is that my period pain has completely stopped, which has made a huge difference in my daily life. A heartfelt thank you to my dietitian Lavina Ma’am for such a simple, sustainable, and effective diet, and to my fit coach Dr. Bhanupriya Ma’am for the right workouts, guidance, and constant motivation.",
     },
     {
-      seed: 21,
-      name: "Priya Nair",
-      role: "Software Developer, @Northwind",
+      name: "Nidhi Suhane",
+      role: "Lost 4kg in 1 month.",
       quote:
-        "I've tried a lot of Tailwind kits — this is the most complete and the fastest to build with. The copy-paste workflow alone saves hours.",
+        "Very happy with FitMom Club! I lost 4 kg in just one month with workouts and a proper diet plan, and I also saw significant improvement in my diastasis recti. The workouts are effective, easy to follow, and well-guided. Special thanks to Coach Mrs Ragala Amoolya and Dietitian Mrs Juveria Fatima for their constant support and guidance.",
     },
   ],
-  belowVideo: {
-    seed: 58,
-    name: "Ravi Sethi",
-    role: "Founder @Ovly",
-    quote: "Feels like a real step up from the usual starter kits — and it actually looks this good out of the box 🚀",
-  },
 };
 
 const VideoCard = () => {
@@ -126,9 +105,9 @@ const VideoCard = () => {
 
       <div className="relative">
         <p className="text-white text-lg italic" style={{ fontFamily: "'Sora', sans-serif" }}>
-          Marek Novak
+          Richi Sharma
         </p>
-        <p className="text-white/70 text-sm">Developer and Software Engineer</p>
+        <p className="text-white/70 text-sm">Lost 14 kg</p>
       </div>
     </div>
   );
@@ -166,7 +145,6 @@ export default function TestimonialSection() {
 
           <div className="flex flex-col gap-6">
             <VideoCard />
-            
           </div>
 
           {/* Right column */}
