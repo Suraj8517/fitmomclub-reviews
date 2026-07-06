@@ -3,7 +3,7 @@ import { Users, Star, Globe2, CircleCheck } from "lucide-react";
 
 
 const stats = [
-  { Icon: Users, value: "1,00,000+", label: "Members worldwide" },
+  { Icon: Users, value: "1,00,000+", label: "Real Transformation" },
   { Icon: Star, value: "4.7", label: "Average rating" },
   { Icon: Globe2, value: "70+", label: "Countries reached" },
   { Icon: CircleCheck, value: "98%", label: "Success Rate" },
