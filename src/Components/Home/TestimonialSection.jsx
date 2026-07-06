@@ -1,8 +1,7 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import {
   ChevronLeft,
   ChevronRight,
-  Quote,
   ShieldCheck,
   Star,
   PenLine,
@@ -13,49 +12,102 @@ const RAW_TESTIMONIALS = [
     quote:
       "I started my journey with FitMom Club in August 2025 and have seen fantastic results. Guidance from my diet coach Rachana and fitness coach Chandini was very helpful in reaching my target the healthy way. Still continuing with them to get even fitter!",
     author: "Kavya Ramani, Lost 13kg",
+    title: "Best decision for my health",
+    location: "Mumbai",
+    plan: "PRO plan",
+    duration: "10 months",
+    tags: ["Weight loss"],
   },
   {
     quote:
       "I reached out to FitMom Club because I wanted a structured, supportive space to focus on my fitness and well-being. The workouts are motivating, the coaching is personalized, and the community keeps me accountable in the best way.",
     author: "Suchithra S, Lost 9.5kg",
+    title: "Accountability that actually works",
+    location: "Chennai",
+    plan: "Elite plan",
+    duration: "8 months",
+    tags: [ "Personalized coaching"],
   },
   {
     quote:
       "I can genuinely see and feel an amazing transformation in myself. My Diastasis Recti, which was 4 fingers earlier, has now been completely reduced, and my energy, stamina, and confidence have improved tremendously.",
     author: "Naina Ghatge, Lost 4kg",
+    title: "My diastasis recti is finally gone",
+    location: "Pune",
+    plan: "PRO plan",
+    duration: "6 months",
+    tags: ["Diastasis recti", "Postpartum recovery"],
   },
   {
     quote:
       "Very happy with FitMom Club! I lost 4kg in just one month with workouts and a proper diet plan, and I also saw significant improvement in my diastasis recti. The workouts are effective, easy to follow, and well-guided.",
     author: "Nidhi Suhane, Lost 4kg",
+    title: "4kg down in the first month",
+    location: "Bengaluru",
+    plan: "Starter plan",
+    duration: "1 month",
+    tags: ["Weight loss", "Diastasis recti"],
   },
   {
     quote:
       "Postpartum, I had no idea where to start. My coaches built a plan around my recovery, not against it. Six months in, my diastasis recti has closed up and I finally feel like myself again.",
     author: "Meera Iyer, Lost 6kg",
+    title: "Finally feel like myself again",
+    location: "Hyderabad",
+    plan: "PRO plan",
+    duration: "6 months",
+    tags: ["Postpartum recovery", "Diastasis recti"],
   },
   {
     quote:
       "What I love most is that nobody made me feel guilty for slow weeks. The check-ins, the diet tweaks, the form corrections on every workout, it all added up. I am stronger now than I was before I had my baby.",
     author: "Ananya Deshpande, Lost 7.5kg",
+    title: "Stronger than before my baby",
+    location: "Delhi NCR",
+    plan: "Elite plan",
+    duration: "7 months",
+    tags: ["Strength training"],
   },
   {
     quote:
       "Between night feeds and a toddler, I didn't think consistency was possible. FitMom Club made it simple. Clear weekly plans, a coach who actually replies, and results I can see in the mirror.",
     author: "Priya Nair, Lost 5kg",
+    title: "Consistency, finally made simple",
+    location: "Dubai (NRI)",
+    plan: "Elite plan",
+    duration: "5 months",
+    tags: ["Weight loss"],
   },
 ];
 
-const TESTIMONIALS = RAW_TESTIMONIALS.map(({ quote, author }) => {
-  const [name, result] = author.split(",").map((s) => s.trim());
-  const initials = name
-    .split(" ")
-    .map((w) => w[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-  return { quote, name, result, initials };
-});
+const TESTIMONIALS = RAW_TESTIMONIALS.map(
+  ({ quote, author, title, location, plan, duration, tags }) => {
+    const [name, result] = author.split(",").map((s) => s.trim());
+    const initials = name
+      .split(" ")
+      .map((w) => w[0])
+      .join("")
+      .slice(0, 2)
+      .toUpperCase();
+    return {
+      quote,
+      name,
+      result,
+      initials,
+      title,
+      location,
+      plan,
+      duration,
+      tags,
+      rating: 5,
+    };
+  }
+);
+
+const ALL_TAGS = [
+  "All",
+  ...Array.from(new Set(TESTIMONIALS.flatMap((t) => t.tags))),
+];
 
 const STATS = [
   { value: "3.3", label: "App Store" },
@@ -87,46 +139,75 @@ function useItemsPerView() {
 
 export default function TestimonialCarousel() {
   const itemsPerView = useItemsPerView();
-  const maxIndex = Math.max(0, TESTIMONIALS.length - itemsPerView);
+  const [activeTag, setActiveTag] = useState("All");
+
+  const filtered = useMemo(
+    () =>
+      activeTag === "All"
+        ? TESTIMONIALS
+        : TESTIMONIALS.filter((t) => t.tags.includes(activeTag)),
+    [activeTag]
+  );
+
+  const maxIndex = Math.max(0, filtered.length - itemsPerView);
   const [index, setIndex] = useState(0);
-  const dragState = useRef({ startX: 0, dragging: false, moved: 0 });
-  const trackRef = useRef(null);
+  const scrollerRef = useRef(null);
+  const cardRefs = useRef([]);
+  const isProgrammaticScroll = useRef(false);
+  const scrollEndTimeout = useRef(null);
 
   useEffect(() => {
     setIndex((i) => Math.min(i, maxIndex));
   }, [maxIndex]);
 
-  const goTo = useCallback(
-    (i) => setIndex(Math.min(Math.max(i, 0), maxIndex)),
+  // Reset to the start whenever the filter changes.
+  useEffect(() => {
+    cardRefs.current = [];
+    setIndex(0);
+    if (scrollerRef.current) {
+      scrollerRef.current.scrollTo({ left: 0, behavior: "auto" });
+    }
+  }, [activeTag]);
+
+  const scrollToIndex = useCallback(
+    (i) => {
+      const clamped = Math.min(Math.max(i, 0), maxIndex);
+      const el = cardRefs.current[clamped];
+      const container = scrollerRef.current;
+      if (el && container) {
+        isProgrammaticScroll.current = true;
+        container.scrollTo({ left: el.offsetLeft, behavior: "smooth" });
+        setIndex(clamped);
+        window.clearTimeout(scrollEndTimeout.current);
+        scrollEndTimeout.current = window.setTimeout(() => {
+          isProgrammaticScroll.current = false;
+        }, 500);
+      }
+    },
     [maxIndex]
   );
-  const next = useCallback(() => goTo(index + 1), [goTo, index]);
-  const prev = useCallback(() => goTo(index - 1), [goTo, index]);
 
-  const onPointerDown = (e) => {
-    dragState.current.startX = e.clientX ?? e.touches?.[0]?.clientX ?? 0;
-    dragState.current.dragging = true;
-    dragState.current.moved = 0;
-  };
+  const next = useCallback(() => scrollToIndex(index + 1), [scrollToIndex, index]);
+  const prev = useCallback(() => scrollToIndex(index - 1), [scrollToIndex, index]);
 
-  const onPointerMove = (e) => {
-    if (!dragState.current.dragging) return;
-    const x = e.clientX ?? e.touches?.[0]?.clientX ?? 0;
-    dragState.current.moved = x - dragState.current.startX;
-  };
+  // Keep the active dot in sync when the user scrolls/swipes naturally.
+  const handleScroll = useCallback(() => {
+    if (isProgrammaticScroll.current) return;
+    const container = scrollerRef.current;
+    if (!container) return;
 
-  const endDrag = () => {
-    if (!dragState.current.dragging) return;
-    const moved = dragState.current.moved;
-    dragState.current.dragging = false;
-    dragState.current.moved = 0;
-    const threshold = 60;
-    if (moved < -threshold) next();
-    else if (moved > threshold) prev();
-  };
-
-  const cardWidth = 100 / itemsPerView;
-  const trackOffset = index * cardWidth;
+    let closest = 0;
+    let closestDist = Infinity;
+    cardRefs.current.forEach((el, i) => {
+      if (!el) return;
+      const dist = Math.abs(el.offsetLeft - container.scrollLeft);
+      if (dist < closestDist) {
+        closestDist = dist;
+        closest = i;
+      }
+    });
+    setIndex(Math.min(closest, maxIndex));
+  }, [maxIndex]);
 
   return (
     <section className="w-full bg-white py-16 px-4 sm:px-8">
@@ -138,7 +219,7 @@ export default function TestimonialCarousel() {
             Verified member reviews
           </span>
 
-          <h2 className="mt-5 font-serif text-3xl sm:text-4xl text-slate-900">
+          <h2 className="mt-5 font-poppins text-3xl sm:text-4xl text-slate-900">
             Real results from real women
           </h2>
 
@@ -150,7 +231,7 @@ export default function TestimonialCarousel() {
           <div className="mt-9 flex flex-wrap items-start justify-center gap-x-10 gap-y-6 sm:gap-x-14">
             {STATS.map((s) => (
               <div key={s.label}>
-                <p className="font-serif text-2xl sm:text-3xl text-slate-900">
+                <p className="font-poppins text-2xl sm:text-3xl text-slate-900">
                   {s.value}
                 </p>
                 <p className="mt-1 text-xs sm:text-sm text-slate-500">
@@ -172,7 +253,7 @@ export default function TestimonialCarousel() {
         {/* Rating summary */}
         <div className="mb-12 mx-auto max-w-4xl grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-8 sm:gap-12 rounded-3xl border border-slate-100 bg-white px-6 py-8 sm:px-10">
           <div className="flex sm:flex-col  items-center sm:items-start gap-4 sm:gap-2 sm:border-r sm:border-slate-100 sm:pr-12">
-            <p className="font-serif text-5xl text-slate-900">4.7</p>
+            <p className="font-poppins text-5xl text-slate-900">4.7</p>
             <div>
               <div className="flex gap-0.5 text-amber-400">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -205,95 +286,151 @@ export default function TestimonialCarousel() {
           </div>
         </div>
 
+        {/* Tag filter */}
+        <div className="mb-6 flex flex-wrap items-center justify-center gap-2">
+          {ALL_TAGS.map((tag) => (
+            <button
+              key={tag}
+              type="button"
+              onClick={() => setActiveTag(tag)}
+              className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+                activeTag === tag
+                  ? "bg-teal-900 border-teal-900 text-white"
+                  : "bg-white border-slate-200 text-slate-600 hover:border-teal-300 hover:text-teal-800"
+              }`}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+
         {/* Carousel */}
         <div className="relative">
-          <div
-            className="overflow-hidden select-none"
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={endDrag}
-            onPointerLeave={endDrag}
-            onTouchStart={onPointerDown}
-            onTouchMove={onPointerMove}
-            onTouchEnd={endDrag}
-          >
+          <style>{`
+            .fmc-scroller {
+              scrollbar-width: none;
+              -ms-overflow-style: none;
+            }
+            .fmc-scroller::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
+
+          {filtered.length === 0 ? (
+            <p className="py-16 text-center text-sm text-slate-500">
+              No reviews match this filter yet.
+            </p>
+          ) : (
             <div
-              ref={trackRef}
-              className="flex transition-transform duration-500 ease-out"
-              style={{ transform: `translateX(-${trackOffset}%)` }}
+              ref={scrollerRef}
+              onScroll={handleScroll}
+              className="fmc-scroller flex overflow-x-auto snap-x snap-mandatory scroll-smooth -mx-3 px-3"
             >
-              {TESTIMONIALS.map((t, i) => (
+              {filtered.map((t, i) => (
                 <div
-                  key={i}
-                  className="shrink-0 px-3"
-                  style={{ width: `${cardWidth}%` }}
+                  key={t.name + i}
+                  ref={(el) => (cardRefs.current[i] = el)}
+                  className="shrink-0 snap-start px-3 w-full md:w-1/3"
                 >
-                  <div className="relative h-full flex flex-col rounded-2xl border border-slate-100 bg-white p-7 shadow-sm">
-                    <Quote
-                      className="absolute top-6 right-6 h-8 w-8 text-teal-50"
-                      strokeWidth={0}
-                      fill="currentColor"
-                    />
-                    <p className="relative font-serif text-[15px] leading-relaxed text-slate-700 flex-1">
-                      {t.quote}
-                    </p>
-                    <div className="mt-6 flex items-center gap-3 pt-5 border-t border-slate-100">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-teal-900 text-sm font-semibold text-white shrink-0">
-                        {t.initials}
+                  <div className="relative h-full flex flex-col rounded-2xl border border-slate-100 bg-teal-50 p-6 shadow-sm">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-teal-900 text-sm font-semibold text-white">
+                          {t.initials}
+                        </div>
+                        <div className="min-w-0">
+                          <p className="font-medium text-slate-900 truncate">
+                            {t.name}
+                          </p>
+                        </div>
                       </div>
-                      <div className="min-w-0">
-                        <p className="font-medium text-slate-900 truncate">
-                          {t.name}
-                        </p>
-                        <span className="inline-block mt-0.5 rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-medium text-teal-800">
-                          {t.result}
+
+                      <div className="flex flex-col items-end gap-1.5 shrink-0">
+                        <div className="flex gap-0.5 text-amber-400">
+                          {Array.from({ length: t.rating }).map((_, si) => (
+                            <Star
+                              key={si}
+                              className="h-3 w-3"
+                              fill="currentColor"
+                              strokeWidth={0}
+                            />
+                          ))}
+                        </div>
+                        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-700">
+                          <ShieldCheck className="h-3 w-3" />
+                          Verified
                         </span>
                       </div>
+                    </div>
+
+                    <h3 className="mt-4 font-poppins text-lg text-slate-900">
+                      {t.title}
+                    </h3>
+
+                    <p className="mt-2 text-[15px] leading-relaxed text-slate-600 flex-1">
+                      {t.quote}
+                    </p>
+
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {t.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-full border border-slate-200 px-2.5 py-1 text-xs text-slate-600"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="mt-4 rounded-xl bg-teal-100 px-4 py-2.5 text-sm font-medium text-teal-900">
+                      {t.result}
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
+          )}
         </div>
 
         {/* Dots + nav buttons */}
-        <div className="mt-8 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            {Array.from({ length: maxIndex + 1 }).map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => goTo(i)}
-                aria-label={`Go to slide ${i + 1}`}
-                className={`h-1.5 rounded-full transition-all ${
-                  i === index ? "w-6 bg-teal-900" : "w-1.5 bg-slate-200"
-                }`}
-              />
-            ))}
-          </div>
+        {filtered.length > 0 && (
+          <div className="mt-8 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => scrollToIndex(i)}
+                  aria-label={`Go to slide ${i + 1}`}
+                  className={`h-1.5 rounded-full transition-all ${
+                    i === index ? "w-6 bg-teal-900" : "w-1.5 bg-slate-200"
+                  }`}
+                />
+              ))}
+            </div>
 
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={prev}
-              disabled={index === 0}
-              aria-label="Previous testimonials"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white border border-slate-200 text-teal-900 shadow-sm hover:bg-teal-900 hover:text-white hover:border-teal-900 transition-colors disabled:opacity-30 disabled:pointer-events-none"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-            <button
-              type="button"
-              onClick={next}
-              disabled={index === maxIndex}
-              aria-label="Next testimonials"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white border border-slate-200 text-teal-900 shadow-sm hover:bg-teal-900 hover:text-white hover:border-teal-900 transition-colors disabled:opacity-30 disabled:pointer-events-none"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={prev}
+                disabled={index === 0}
+                aria-label="Previous testimonials"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white border border-slate-200 text-teal-900 shadow-sm hover:bg-teal-900 hover:text-white hover:border-teal-900 transition-colors disabled:opacity-30 disabled:pointer-events-none"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={next}
+                disabled={index === maxIndex}
+                aria-label="Next testimonials"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white border border-slate-200 text-teal-900 shadow-sm hover:bg-teal-900 hover:text-white hover:border-teal-900 transition-colors disabled:opacity-30 disabled:pointer-events-none"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

@@ -123,13 +123,13 @@ export default function VideoSection() {
 
           {/* Top: headline + description */}
           <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 items-start py-3">
-            <h1 className="text-5xl sm:text-6xl leading-[1.05] font-semibold tracking-tight text-slate-900">
+            <h1 className="text-center sm:text-left text-5xl sm:text-6xl leading-[1.05] font-semibold tracking-tight text-slate-900 font-serif">
               Short stories 
               <br />
               <span className="text-teal-700">from members</span>
             </h1>
 
-            <div className="lg:pt-4 pl-22">
+            <div className="lg:pt-4 sm:pl-22">
               <p className="text-slate-500 text-base leading-relaxed max-w-lg ">
                 Real experiences from FitMom Club members, sharing their challenges, small wins, and transformations to inspire and support others on their fitness journey.
               </p>

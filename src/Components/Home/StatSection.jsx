@@ -6,7 +6,7 @@ import { Users, Star, Globe2, CircleCheck } from "lucide-react";
 // <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 const stats = [
-  { Icon: Users, value: "10,000+", label: "Members worldwide" },
+  { Icon: Users, value: "1,00,000+", label: "Members worldwide" },
   { Icon: Star, value: "4.8", label: "Average rating" },
   { Icon: Globe2, value: "38+", label: "Countries reached" },
   { Icon: CircleCheck, value: "96%", label: "Would recommend" },
@@ -15,7 +15,7 @@ const stats = [
 export default function StatsSection() {
   return (
     <section className=" py-14 sm:pt-20 px-4 sm:px-6">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-3xl">
         {/* Eyebrow */}
         <div className="flex items-center gap-3 mb-10 sm:mb-12 justify-center">
           <span className="h-px w-6 sm:w-8 bg-[#0E7C74]" />
