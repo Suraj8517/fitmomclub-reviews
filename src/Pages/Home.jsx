@@ -7,9 +7,12 @@ import TestimonialSection from '../Components/Home/TestimonialSection'
 import ProgramRatings from '../Components/Home/ProgramReview'
 import CTASection from '../Components/Home/CTASection'
 import FaqSection from '../Components/Home/FAQSection'
+import Navbar from '../Components/Home/Navbar'
+import Footer from '../Components/Home/Footer'
 export default function Home() {
   return (
     <div>
+        <Navbar/>
         <Hero/>
         <StatsSection/>
         <VideoSection/>
@@ -18,6 +21,7 @@ export default function Home() {
         <ProgramRatings/>
         <CTASection/>
         <FaqSection/>
+        <Footer/>
     </div>
   )
 }

@@ -36,7 +36,7 @@ export default function Hero() {
               className="relative pointer-events-none select-none sm:absolute inset-0 z-0 flex items-center justify-center overflow-visible"
             >
               <span
-                className=" absolute sm:static sm:top-2 top-16 -sm:left-5 whitespace-nowrap normal-case text-teal-900/10 text-[5rem] sm:text-[4.5rem] lg:text-[7.5rem] xl:text-[10rem] leading-none sm:-rotate-15
+                className="hidden sm:block absolute sm:static sm:top-2 -sm:left-5 whitespace-nowrap normal-case text-teal-900/10 text-[5rem] sm:text-[4.5rem] lg:text-[7.5rem] xl:text-[10rem] leading-none sm:-rotate-15
       origin-center"
                 style={{ fontFamily: "'Great Vibes', cursive" }}
               >
@@ -51,7 +51,7 @@ export default function Hero() {
                 className="absolute left-3 w-full h-full object-cover object-center "
               />
             </div>
-            <div className="z-10 pointer-events-none absolute inset-x-0 bottom-0 h-20 sm:h-28 lg:h-40 lg:rounded-none rounded-b-[2rem] bg-gradient-to-b from-transparent to-white" />
+            <div className="z-10 pointer-events-none absolute inset-x-0 -bottom-1 sm:bottom-0 h-23 sm:h-28 lg:h-40 lg:rounded-none rounded-b-[2rem] bg-gradient-to-b from-transparent to-white" />
           </div>
         </div>
 

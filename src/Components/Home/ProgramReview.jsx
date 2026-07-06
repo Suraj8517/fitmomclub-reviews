@@ -1,5 +1,5 @@
-import { Leaf, Flower2, Zap, Waves, Star } from "lucide-react";
-    import { useEffect, useState } from "react";
+import { Leaf, Flower2, Zap, Waves, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import imgHealth from "../../assets/home/program/img1.jpg";
 import imgFertility from "../../assets/home/program/img4.jpg";
@@ -62,9 +62,8 @@ const PROGRAMS = [
 // ─── Shared wave clip-path for the photo edge ────────────────────────────────
 
 function WaveClipDef() {
-
   return (
-    <svg width="0" height="0" className="absolute" aria-hidden="true" >
+    <svg width="0" height="0" className="absolute" aria-hidden="true">
       <defs>
         <clipPath id="program-wave-clip" clipPathUnits="objectBoundingBox">
           <path
@@ -73,7 +72,7 @@ function WaveClipDef() {
                C0.95,0.44 0.68,0.52 0.85,0.62
                C0.98,0.7 0.7,0.82 0.78,0.92
                C0.82,0.96 0.75,1 0.72,1
-               L0,1 Z" 
+               L0,1 Z"
           />
         </clipPath>
       </defs>
@@ -111,26 +110,29 @@ function StarRating({ rating, reviewCount }) {
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 function ProgramCard({ program }) {
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 640 : false
+  );
 
-useEffect(() => {
-  const handleResize = () => setIsMobile(window.innerWidth < 640);
-  window.addEventListener("resize", handleResize);
-  return () => window.removeEventListener("resize", handleResize);
-}, []);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const Icon = program.icon;
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-[2rem] bg-teal-100 shadow-[0_20px_60px_-20px_rgba(15,42,39,0.18)] sm:flex-row">
+    <div className="flex h-[500px] sm:h-[300px] flex-col overflow-hidden rounded-[2rem] bg-teal-100 shadow-[0_20px_60px_-20px_rgba(15,42,39,0.18)] sm:flex-row">
       {/* Photo */}
       <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-[42%]">
-       <img
-  src={program.image}
-  alt={program.eyebrow}
-  className="absolute inset-0 h-full w-full object-cover"
-  style={{
-    clipPath: isMobile ? "none" : "url(#program-wave-clip)",
-  }}
-/>
+        <img
+          src={program.image}
+          alt={program.eyebrow}
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{
+            clipPath: isMobile ? "none" : "url(#program-wave-clip)",
+          }}
+        />
       </div>
 
       {/* Content */}
@@ -159,7 +161,12 @@ useEffect(() => {
 // ─── Section ──────────────────────────────────────────────────────────────────
 
 export default function ProgramRatings() {
-    
+  const [current, setCurrent] = useState(0);
+  const total = PROGRAMS.length;
+
+  const goPrev = () => setCurrent((prev) => (prev === 0 ? total - 1 : prev - 1));
+  const goNext = () => setCurrent((prev) => (prev === total - 1 ? 0 : prev + 1));
+
   return (
     <section className="w-full overflow-hidden bg-white py-20 px-4 sm:px-8">
       <WaveClipDef />
@@ -184,10 +191,45 @@ export default function ProgramRatings() {
         </p>
       </div>
 
+      {/* Grid: all cards visible on lg+, only the active card shown on mobile */}
       <div className="mx-auto mt-14 grid max-w-4xl grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
         {PROGRAMS.map((program, i) => (
-          <ProgramCard key={i} program={program} />
+          <div key={i} className={i === current ? "block" : "hidden lg:block"}>
+            <ProgramCard program={program} />
+          </div>
         ))}
+      </div>
+
+      {/* Mobile-only navigation */}
+      <div className="mx-auto mt-8 flex max-w-4xl items-center justify-between gap-4 lg:hidden">
+        <button
+          onClick={goPrev}
+          aria-label="Previous program"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-900 transition-all duration-150 hover:border-teal-300"
+        >
+          <ChevronLeft className="h-4 w-4" strokeWidth={2} />
+        </button>
+
+        <div className="flex items-center gap-2">
+          {PROGRAMS.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              aria-label={`Go to program ${i + 1}`}
+              className={`rounded-full transition-all duration-300 ${
+                i === current ? "w-6 bg-slate-900" : "w-1.5 bg-slate-300"
+              } h-1.5`}
+            />
+          ))}
+        </div>
+
+        <button
+          onClick={goNext}
+          aria-label="Next program"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-900 transition-all duration-150 hover:border-teal-300"
+        >
+          <ChevronRight className="h-4 w-4" strokeWidth={2} />
+        </button>
       </div>
     </section>
   );
