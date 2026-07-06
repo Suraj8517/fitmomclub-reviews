@@ -36,7 +36,7 @@ export default function Hero() {
               className="relative pointer-events-none select-none sm:absolute inset-0 z-0 flex items-center justify-center overflow-visible"
             >
               <span
-                className=" absolute sm:static top-2 -sm:left-5 whitespace-nowrap normal-case text-teal-900/10 text-[5rem] sm:text-[4.5rem] lg:text-[7.5rem] xl:text-[9rem] leading-none -rotate-25
+                className=" absolute sm:static sm:top-2 top-16 -sm:left-5 whitespace-nowrap normal-case text-teal-900/10 text-[5rem] sm:text-[4.5rem] lg:text-[7.5rem] xl:text-[10rem] leading-none sm:-rotate-15
       origin-center"
                 style={{ fontFamily: "'Great Vibes', cursive" }}
               >
@@ -85,13 +85,13 @@ export default function Hero() {
             >
               Start your journey
             </a>
-
+{/*
             <a
               href="#reviews"
               className="text-sm sm:text-base font-medium text-slate-900 hover:text-emerald-800 transition-colors underline underline-offset-4 decoration-slate-300 hover:decoration-emerald-800"
             >
               Read the reviews
-            </a>
+            </a>*/}
           </div>
 
           <div className="mt-8 flex items-center justify-center lg:justify-start gap-4">

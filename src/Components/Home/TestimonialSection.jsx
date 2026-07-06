@@ -6,7 +6,6 @@ import {
   Star,
   PenLine,
 } from "lucide-react";
-
 const RAW_TESTIMONIALS = [
   {
     quote:
@@ -26,7 +25,7 @@ const RAW_TESTIMONIALS = [
     location: "Chennai",
     plan: "Elite plan",
     duration: "8 months",
-    tags: [ "Personalized coaching"],
+    tags: ["Personalized coaching"],
   },
   {
     quote:
@@ -50,13 +49,13 @@ const RAW_TESTIMONIALS = [
   },
   {
     quote:
-      "Postpartum, I had no idea where to start. My coaches built a plan around my recovery, not against it. Six months in, my diastasis recti has closed up and I finally feel like myself again.",
-    author: "Meera Iyer, Lost 6kg",
+      "I lost 6kg in just 4 months while reversing my borderline PCOS and bringing my triglycerides down from 230 to 79. My coaches, Divya and Dr. Abarna, made the journey practical, sustainable, and truly life-changing.",
+    author: "Darshana Sethuraman, Lost 6kg",
     title: "Finally feel like myself again",
     location: "Hyderabad",
     plan: "PRO plan",
-    duration: "6 months",
-    tags: ["Postpartum recovery", "Diastasis recti"],
+    duration: "4 months",
+    tags: ["PCOS", "Weight loss"],
   },
   {
     quote:
@@ -70,12 +69,12 @@ const RAW_TESTIMONIALS = [
   },
   {
     quote:
-      "Between night feeds and a toddler, I didn't think consistency was possible. FitMom Club made it simple. Clear weekly plans, a coach who actually replies, and results I can see in the mirror.",
-    author: "Priya Nair, Lost 5kg",
+      "In just 3 months, I lost nearly 7kg with the support of my coach Amoolya and trainer Gautham. Their constant motivation, personalized guidance, and enjoyable workouts made my weight loss journey easy and sustainable.",
+    author: "Amuru Kishore, Lost 7kg",
     title: "Consistency, finally made simple",
     location: "Dubai (NRI)",
     plan: "Elite plan",
-    duration: "5 months",
+    duration: "3 months",
     tags: ["Weight loss"],
   },
 ];
@@ -228,10 +227,15 @@ export default function TestimonialCarousel() {
             their health with FitMom Club. Read what they have to say.
           </p>
 
-          <div className="mt-9 flex flex-wrap items-start justify-center gap-x-10 gap-y-6 sm:gap-x-14">
+          <div className="mt-9 flex flex-wrap items-start justify-center gap-x-10 gap-y-6 sm:gap-x-14 ">
             {STATS.map((s) => (
               <div key={s.label}>
-                <p className="font-poppins text-2xl sm:text-3xl text-slate-900">
+                <p className="font-poppins text-2xl sm:text-3xl text-slate-900"  style={{
+                    fontFamily: "'Fraunces', serif",
+                    fontOpticalSizing: "auto",
+                    fontWeight: 600,
+                    fontSize: "clamp(1.5rem, 5vw, 2.75rem)",
+                  }}>
                   {s.value}
                 </p>
                 <p className="mt-1 text-xs sm:text-sm text-slate-500">
@@ -242,18 +246,37 @@ export default function TestimonialCarousel() {
           </div>
 
           <button
+          onClick={() =>
+    window.open(
+      "https://www.google.com/search?sca_esv=3926efc4ae7c8dc3&sxsrf=APpeQnv6lxE3Nuc5w-6f--gcR87hlbqh3Q:1783326023099&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_xiUktYNqhFFAEToXbnQTEpkbwZ8eHTUSzXMOydKjhVpQfhyJlY6XuCsY_MOCABU_7nHrp0yYmU32UsPCMv47NQoHQcL&q=FitMom+Club+Reviews&sa=X&ved=2ahUKEwjokYCRz72VAxVKbmwGHYncEIAQ0bkNegQILhAF&biw=1280&bih=551&dpr=1.5#lrd=0x3ba8f7ae88f23111:0x590c0b3b8586d660,1,,,,",
+      "_blank",
+      "noopener,noreferrer"
+    )}
             type="button"
-            className="mt-9 inline-flex items-center gap-2 rounded-full border border-teal-200 bg-white px-5 py-2.5 text-sm font-medium text-teal-800 shadow-sm hover:bg-teal-900 hover:text-white hover:border-teal-900 transition-colors"
+            className="mt-9 inline-flex items-center gap-2 mr-4 rounded-full border border-teal-200 bg-white px-5 py-2.5 text-sm font-medium text-teal-800 shadow-sm hover:bg-teal-900 hover:text-white hover:border-teal-900 transition-colors"
           >
             <PenLine className="h-4 w-4" />
             Share your story
           </button>
+         <a
+  href="https://www.google.com/search?sca_esv=3926efc4ae7c8dc3&sxsrf=APpeQnv6lxE3Nuc5w-6f--gcR87hlbqh3Q:1783326023099&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_xiUktYNqhFFAEToXbnQTEpkbwZ8eHTUSzXMOydKjhVpQfhyJlY6XuCsY_MOCABU_7nHrp0yYmU32UsPCMv47NQoHQcL&q=FitMom+Club+Reviews&sa=X&ved=2ahUKEwjokYCRz72VAxVKbmwGHYncEIAQ0bkNegQILhAF&biw=1280&bih=551&dpr=1.5#lrd=0x3ba8f7ae88f23111:0x590c0b3b8586d660,1,,,,"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-sm sm:text-base font-medium text-slate-900 hover:text-emerald-800 transition-colors underline underline-offset-4 decoration-slate-300 hover:decoration-emerald-800"
+>
+  Read the reviews
+</a>
         </div>
 
         {/* Rating summary */}
-        <div className="mb-12 mx-auto max-w-4xl grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-8 sm:gap-12 rounded-3xl border border-slate-100 bg-white px-6 py-8 sm:px-10">
+        <div className="mb-12 mx-auto grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-8 sm:gap-12 rounded-3xl border border-slate-100 bg-white px-6 py-8 sm:px-10 sm:max-w-3xl">
           <div className="flex sm:flex-col  items-center sm:items-start gap-4 sm:gap-2 sm:border-r sm:border-slate-100 sm:pr-12">
-            <p className="font-poppins text-5xl text-slate-900">4.7</p>
+            <p className="font-poppins text-5xl text-slate-900"  style={{
+                    fontFamily: "'Fraunces', serif",
+                    fontOpticalSizing: "auto",
+                    fontWeight: 600,
+                    fontSize: "clamp(2.5rem, 6vw, 3.75rem)",
+                  }}>4.7</p>
             <div>
               <div className="flex gap-0.5 text-amber-400">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -321,74 +344,91 @@ export default function TestimonialCarousel() {
               No reviews match this filter yet.
             </p>
           ) : (
-            <div
-              ref={scrollerRef}
-              onScroll={handleScroll}
-              className="fmc-scroller flex overflow-x-auto snap-x snap-mandatory scroll-smooth -mx-3 px-3"
-            >
-              {filtered.map((t, i) => (
-                <div
-                  key={t.name + i}
-                  ref={(el) => (cardRefs.current[i] = el)}
-                  className="shrink-0 snap-start px-3 w-full md:w-1/3"
-                >
-                  <div className="relative h-full flex flex-col rounded-2xl border border-slate-100 bg-teal-50 p-6 shadow-sm">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex items-center gap-3 min-w-0">
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-teal-900 text-sm font-semibold text-white">
-                          {t.initials}
+            <>
+              {/* Left fade */}
+              <div
+                aria-hidden="true"
+                className={`pointer-events-none absolute inset-y-0 -left-6 z-10 w-6 sm:w-20 bg-gradient-to-r from-white via-white/80 to-transparent transition-opacity duration-300 ${
+                  index === 0 ? "opacity-0" : "opacity-100"
+                }`}
+              />
+              {/* Right fade */}
+              <div
+                aria-hidden="true"
+                className={`pointer-events-none absolute inset-y-0 -right-6 z-10 w-6 sm:w-20 bg-gradient-to-l from-white via-white/80 to-transparent transition-opacity duration-300 ${
+                  index === maxIndex ? "opacity-0" : "opacity-100"
+                }`}
+              />
+
+              <div
+                ref={scrollerRef}
+                onScroll={handleScroll}
+                className="fmc-scroller flex overflow-x-auto snap-x snap-mandatory scroll-smooth -mx-3 px-3"
+              >
+                {filtered.map((t, i) => (
+                  <div
+                    key={t.name + i}
+                    ref={(el) => (cardRefs.current[i] = el)}
+                    className="shrink-0 snap-start px-3 w-full md:w-1/3"
+                  >
+                    <div className="relative h-full flex flex-col rounded-2xl border border-slate-100 bg-teal-50 p-6 shadow-sm">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-teal-900 text-sm font-semibold text-white">
+                            {t.initials}
+                          </div>
+                          <div className="min-w-0">
+                            <p className="font-medium text-slate-900 truncate">
+                              {t.name}
+                            </p>
+                          </div>
                         </div>
-                        <div className="min-w-0">
-                          <p className="font-medium text-slate-900 truncate">
-                            {t.name}
-                          </p>
+
+                        <div className="flex flex-col items-end gap-1.5 shrink-0">
+                          <div className="flex gap-0.5 text-amber-400">
+                            {Array.from({ length: t.rating }).map((_, si) => (
+                              <Star
+                                key={si}
+                                className="h-3 w-3"
+                                fill="currentColor"
+                                strokeWidth={0}
+                              />
+                            ))}
+                          </div>
+                          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-700">
+                            <ShieldCheck className="h-3 w-3" />
+                            Verified
+                          </span>
                         </div>
                       </div>
 
-                      <div className="flex flex-col items-end gap-1.5 shrink-0">
-                        <div className="flex gap-0.5 text-amber-400">
-                          {Array.from({ length: t.rating }).map((_, si) => (
-                            <Star
-                              key={si}
-                              className="h-3 w-3"
-                              fill="currentColor"
-                              strokeWidth={0}
-                            />
-                          ))}
-                        </div>
-                        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-700">
-                          <ShieldCheck className="h-3 w-3" />
-                          Verified
-                        </span>
+                      <h3 className="mt-4 text-lg text-slate-900 font-poppins">
+                        {t.title}
+                      </h3>
+
+                      <p className="mt-2 text-[15px] leading-relaxed text-slate-600 flex-1">
+                        {t.quote}
+                      </p>
+
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {t.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full border border-slate-200 px-2.5 py-1 text-xs text-slate-600"
+                          >
+                            {tag}
+                          </span>
+                        ))}
                       </div>
-                    </div>
 
-                    <h3 className="mt-4 font-poppins text-lg text-slate-900">
-                      {t.title}
-                    </h3>
-
-                    <p className="mt-2 text-[15px] leading-relaxed text-slate-600 flex-1">
-                      {t.quote}
-                    </p>
-
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {t.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full border border-slate-200 px-2.5 py-1 text-xs text-slate-600"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="mt-4 rounded-xl bg-teal-100 px-4 py-2.5 text-sm font-medium text-teal-900">
-                      {t.result}
+                      <div className="mt-4 rounded-xl bg-teal-100 px-4 py-2.5 text-sm font-medium text-teal-900">
+                        {t.result}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            </>
           )}
         </div>
 

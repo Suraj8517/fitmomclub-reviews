@@ -1,9 +1,6 @@
 import React from "react";
 import { Users, Star, Globe2, CircleCheck } from "lucide-react";
 
-// Google Fonts (Fraunces for the numerals, Inter for everything else)
-// Add this once in your app's index.html:
-// <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 const stats = [
   { Icon: Users, value: "1,00,000+", label: "Members worldwide" },

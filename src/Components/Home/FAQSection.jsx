@@ -1,0 +1,120 @@
+import { useState } from "react";
+import { Plus } from "lucide-react";
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
+
+const FAQS = [
+  {
+    question: "Are these reviews genuine?",
+    answer:
+      "Every review here is from a verified member, collected after milestone check-ins. We do not edit or filter negative feedback, and the same reviews are visible independently on Google, the App Store, and Facebook.",
+  },
+  {
+    question: "How long before I see results?",
+    answer:
+      "Most members notice energy and sleep improvements within 2–3 weeks. Visible physical changes typically show from weeks 6–10, depending on the goal and starting point.",
+  },
+  {
+    question: "Do you have programs for PCOS and thyroid?",
+    answer:
+      "Yes. The Health & Lifestyle program includes dedicated tracks for PCOS, insulin resistance, and thyroid-related weight management, built around Indian food habits.",
+  },
+  {
+    question: "Can I join from outside India?",
+    answer:
+      "Yes — members are spread across 38+ countries. Coaching happens over WhatsApp and video call, and your plan adapts to what's available where you live.",
+  },
+  {
+    question: "What plans do you offer?",
+    answer:
+      "New Bee, PRO, Elite, Blossom, and Miracle — each for a different level of support and goal. Your coach recommends the right one on your first call.",
+  },
+  {
+    question: "Is FitMom Club only for mothers?",
+    answer:
+      "No — despite the name, it serves all women: students, working professionals, and mothers alike.",
+  },
+];
+
+// ─── FAQ Item ─────────────────────────────────────────────────────────────────
+
+function FaqItem({ faq, isOpen, onToggle }) {
+  return (
+    <div className="border-b border-slate-200 py-5 first:pt-0 last:border-b-0">
+      <button
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        className="flex w-full items-center justify-between gap-6 text-left"
+      >
+        <span className="text-base font-medium text-slate-900 sm:text-lg">
+          {faq.question}
+        </span>
+        <span
+          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-900 transition-transform duration-300 ${
+            isOpen ? "rotate-45 border-teal-300 bg-teal-50" : ""
+          }`}
+        >
+          <Plus className="h-4 w-4" strokeWidth={2} />
+        </span>
+      </button>
+
+      <div
+        className="grid overflow-hidden transition-all duration-300 ease-in-out"
+        style={{
+          gridTemplateRows: isOpen ? "1fr" : "0fr",
+          opacity: isOpen ? 1 : 0,
+          marginTop: isOpen ? "0.75rem" : "0",
+        }}
+      >
+        <div className="overflow-hidden">
+          <p className="max-w-2xl leading-relaxed text-slate-500">
+            {faq.answer}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Section ──────────────────────────────────────────────────────────────────
+
+export default function FaqSection() {
+  const [openIndex, setOpenIndex] = useState(0);
+
+  const handleToggle = (index) => {
+    setOpenIndex((prev) => (prev === index ? null : index));
+  };
+
+  return (
+    <section className="w-full bg-white py-20 px-4 sm:px-8" id="faq">
+      <div className="mx-auto max-w-2xl">
+        <div className="text-center">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-100 px-3.5 py-1.5 text-xs font-semibold text-teal-800">
+            Common questions
+          </span>
+          <h2
+            className="mt-4 text-3xl text-slate-900 sm:text-4xl"
+            style={{
+              fontFamily: "'Fraunces', serif",
+              fontOpticalSizing: "auto",
+              fontWeight: 600,
+            }}
+          >
+            What people ask before joining
+          </h2>
+        </div>
+
+        <div className="mt-12">
+          {FAQS.map((faq, i) => (
+            <FaqItem
+              key={i}
+              faq={faq}
+              isOpen={openIndex === i}
+              onToggle={() => handleToggle(i)}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
