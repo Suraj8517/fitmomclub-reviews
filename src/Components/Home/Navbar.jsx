@@ -58,53 +58,8 @@ export default function Navbar() {
         >
           <img src={logo} alt="FitMom Club Logo" className="h-14 w-auto" />
         </a>
-
-        {/* Desktop buttons */}
-        <div className="hidden items-center gap-3 sm:flex">
-          <button className="rounded-full bg-white border border-slate-200 px-5 py-2.5 text-sm font-medium text-slate-900 transition-colors hover:border-teal-300 hover:bg-teal-50">
-            Log in
-          </button>
-          <button onClick={() =>
-    window.open(
-      "https://www.google.com/search?sca_esv=3926efc4ae7c8dc3&sxsrf=APpeQnv6lxE3Nuc5w-6f--gcR87hlbqh3Q:1783326023099&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_xiUktYNqhFFAEToXbnQTEpkbwZ8eHTUSzXMOydKjhVpQfhyJlY6XuCsY_MOCABU_7nHrp0yYmU32UsPCMv47NQoHQcL&q=FitMom+Club+Reviews&sa=X&ved=2ahUKEwjokYCRz72VAxVKbmwGHYncEIAQ0bkNegQILhAF&biw=1280&bih=551&dpr=1.5#lrd=0x3ba8f7ae88f23111:0x590c0b3b8586d660,1,,,,",
-      "_blank",
-      "noopener,noreferrer")} className="rounded-full bg-teal-700 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-teal-800">
-           Share Your Story
-          </button>
-        </div>
-
-        {/* Mobile menu toggle */}
-        <button
-          onClick={() => setMenuOpen((prev) => !prev)}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-900 sm:hidden"
-        >
-          {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
       </div>
 
-      {/* Mobile menu */}
-      <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out sm:hidden ${
-          menuOpen ? "max-h-40" : "max-h-0"
-        }`}
-      >
-        <div className="flex flex-col gap-3 border-t border-slate-100 bg-white px-4 py-5 sm:px-8">
-          <button className="w-full rounded-full bg-white border border-slate-200 px-5 py-2.5 text-sm font-medium text-slate-900 transition-colors hover:border-teal-300 hover:bg-teal-50">
-            Join Now
-          </button>
-          <button
-           onClick={() =>
-    window.open(
-      "https://www.google.com/search?sca_esv=3926efc4ae7c8dc3&sxsrf=APpeQnv6lxE3Nuc5w-6f--gcR87hlbqh3Q:1783326023099&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_xiUktYNqhFFAEToXbnQTEpkbwZ8eHTUSzXMOydKjhVpQfhyJlY6XuCsY_MOCABU_7nHrp0yYmU32UsPCMv47NQoHQcL&q=FitMom+Club+Reviews&sa=X&ved=2ahUKEwjokYCRz72VAxVKbmwGHYncEIAQ0bkNegQILhAF&biw=1280&bih=551&dpr=1.5#lrd=0x3ba8f7ae88f23111:0x590c0b3b8586d660,1,,,,",
-      "_blank",
-      "noopener,noreferrer")}
-       className="w-full rounded-full bg-teal-700 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-teal-800">
-            Share Your Story
-          </button>
-        </div>
-      </div>
     </header>
   );
 }

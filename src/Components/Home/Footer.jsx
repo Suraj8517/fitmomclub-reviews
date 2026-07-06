@@ -10,7 +10,7 @@ export default function Footer() {
         </span>
 
         <p className="text-sm leading-relaxed text-slate-500">
-          © 2026 VMax HealthTech Private Limited · All reviews from verified
+          © 2026 FitMom Club Private Limited · All reviews from verified
           members
         </p>
       </div>

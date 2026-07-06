@@ -4,9 +4,9 @@ import { Users, Star, Globe2, CircleCheck } from "lucide-react";
 
 const stats = [
   { Icon: Users, value: "1,00,000+", label: "Members worldwide" },
-  { Icon: Star, value: "4.8", label: "Average rating" },
-  { Icon: Globe2, value: "38+", label: "Countries reached" },
-  { Icon: CircleCheck, value: "96%", label: "Would recommend" },
+  { Icon: Star, value: "4.7", label: "Average rating" },
+  { Icon: Globe2, value: "70+", label: "Countries reached" },
+  { Icon: CircleCheck, value: "98%", label: "Success Rate" },
 ];
 
 export default function StatsSection() {

@@ -14,7 +14,7 @@ export default function CTASection({
   },
 
   right= {
-    heading: "New to FitMom CLub?",
+    heading: "New to FitMom Club?",
     ctaLabel: "Start Your Journey",
     onClick: () => {},
     desc: "Join our community of empowered women and start your fitness journey today."
@@ -58,7 +58,7 @@ export default function CTASection({
             </div>
 
             {/* Right CTA block */}
-            <div className="hidden sm:block flex flex-col items-center md:items-end text-center md:text-right">
+            <div className="hidden sm:flex flex-col items-center md:items-end text-center md:text-right">
               <h3 className="text-xl sm:text-2xl font-semibold leading-snug text-white max-w-xs">
                 {right.heading}
               </h3>

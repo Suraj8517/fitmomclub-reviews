@@ -2,7 +2,7 @@ import React from "react";
 import heroimg1 from "../../assets/hero/NEW.png";
 import heroimg2 from "../../assets/hero/hero2.jpg";
 import bgImage from "../../assets/hero/bg.webp";
-
+import { ShieldCheck } from "lucide-react";
 
 const AVATARS = [
   "https://i.pravatar.cc/64?img=32",
@@ -58,10 +58,10 @@ export default function Hero() {
         {/* Copy */}
         <div className="order-last lg:order-first text-center lg:text-left">
           <div className="flex items-center justify-center lg:justify-start gap-2.5 mb-2 mt-2 lg:mt-6 lg:pt-10">
-            <span className="w-6 h-px bg-emerald-800" />
-            <span className="text-xs sm:text-sm font-semibold tracking-wide text-emerald-800 uppercase">
-              Verified member outcomes!
-            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-100 px-3.5 py-1.5 text-xs font-semibold text-teal-800">
+                       <ShieldCheck className="h-3.5 w-3.5" />
+                       Verified member reviews
+                     </span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl 2xl:text-7xl leading-[1.08] lg:leading-[1.03] font-semibold tracking-tight text-slate-900">
@@ -73,7 +73,7 @@ export default function Hero() {
           </h1>
 
           <p className="mt-5 lg:mt-7 text-slate-500 text-base sm:text-lg leading-relaxed max-w-md mx-auto lg:mx-0">
-            10,000+ women across 38 countries have changed their health
+            1,00,000+ women across 70+ countries have changed their health
             story with FitMom Club. Here is what actually happened for
             them.
           </p>

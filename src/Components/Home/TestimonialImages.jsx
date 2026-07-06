@@ -18,7 +18,7 @@ import img16 from "../../assets/home/transformation/16.png"
 import img17 from "../../assets/home/transformation/17.png"
 
 const allImages = [
-  { name: "client1",   before: 0, after: 0, loss: 0, duration: "3 months", image: img1 },
+  { name: "client1",   before: 74, after: 58, loss: 0, duration: "3 months", image: img1 },
   { name: "client2",  before: 0, after: 0, loss: 0,  duration: "2 months", image: img2 },
   { name: "client3",   before: 80, after: 65, loss: 15, duration: "4 months", image: img3 },
   { name: "client4",   before: 85, after: 72, loss: 18, duration: "5 months", image: img4 },
@@ -33,7 +33,7 @@ const allImages = [
   { name: "client13",    before: 62, after: 53, loss: 16, duration: "5 months", image: img13 },
   { name: "client14",    before: 82, after: 75, loss: 6,  duration: "6 weeks",  image: img14 },
   { name: "client15",    before: 96, after: 78, loss: 17, duration: "5 months", image: img15 },
-  { name: "client16",    before: 0, after: 0, loss: 17, duration: "5 months", image: img16 },
+  { name: "client16",    before: 72, after: 62, loss: 17, duration: "5 months", image: img16 },
   { name: "client17",    before: 83, after: 73, loss: 17, duration: "5 months", image: img17 },
 
 ];
