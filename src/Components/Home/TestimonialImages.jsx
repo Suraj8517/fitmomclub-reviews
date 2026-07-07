@@ -76,7 +76,7 @@ export default function TransformationSection() {
       style={{ fontFamily: "Poppins, sans-serif" }}
     >
       {/* Header */}
-      <div className="text-center my-10 max-w-2xl mx-auto">
+      <div className="text-center my-2 max-w-2xl mx-auto">
         <p className="text-[10px] tracking-[0.2em] uppercase text-neutral-400 mb-2">
           Real results, real moms
         </p>

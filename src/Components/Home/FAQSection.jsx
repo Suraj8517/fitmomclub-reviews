@@ -86,7 +86,7 @@ export default function FaqSection() {
   };
 
   return (
-    <section className="w-full bg-white py-20 px-4 sm:px-8" id="faq">
+    <section className="w-full bg-white py-10 px-4 sm:px-8" id="faq">
       <div className="mx-auto max-w-2xl">
         <div className="text-center">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-100 px-3.5 py-1.5 text-xs font-semibold text-teal-800">
