@@ -217,7 +217,7 @@ export default function TestimonialCarousel() {
         <div className="mb-6 px-6 py-12 sm:px-12 text-center">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-100 px-3.5 py-1.5 text-xs font-semibold text-teal-800">
             <ShieldCheck className="h-3.5 w-3.5" />
-            Verified member reviews
+            Verified Member Reviews
           </span>
 
           <h2 className="mt-5 font-poppins text-3xl sm:text-4xl text-slate-900">

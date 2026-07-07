@@ -4,7 +4,7 @@ import './index.css'
 export default function 
 () {
   return (
-    <div>
+    <div className="overflow-x-hidden">
         <Home/>
     </div>
   )

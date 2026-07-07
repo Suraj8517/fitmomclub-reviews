@@ -61,7 +61,7 @@ export default function Hero() {
           <div className="flex items-center justify-center lg:justify-start gap-2.5 mb-2 mt-2 lg:mt-6 lg:pt-10">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-100 px-3.5 py-1.5 text-xs font-semibold text-teal-800">
                        <ShieldCheck className="h-3.5 w-3.5" />
-                       Verified member reviews
+Verified Member Reviews
                      </span>
           </div>
 
@@ -118,8 +118,8 @@ export default function Hero() {
                 </span>
               </div>
               <p className="text-xs sm:text-sm text-slate-500">
-                from 500+{" "}
-                <span className="underline underline-offset-2">
+                from 1000+{" "}
+                <span className="text-slate-900 font-medium">
                   reviews
                 </span>
               </p>
