@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
-import {BookOpenCheck ,
+import {
+  BookOpenCheck,
   ChevronLeft,
   ChevronRight,
   ShieldCheck,
   Star,
   PenLine,
 } from "lucide-react";
+
 const RAW_TESTIMONIALS = [
   {
     quote:
@@ -230,12 +232,15 @@ export default function TestimonialCarousel() {
           <div className="mt-9 flex flex-wrap items-start justify-center gap-x-10 gap-y-6 sm:gap-x-14 ">
             {STATS.map((s) => (
               <div key={s.label}>
-                <p className="font-poppins text-2xl sm:text-3xl text-slate-900"  style={{
+                <p
+                  className="font-poppins text-2xl sm:text-3xl text-slate-900"
+                  style={{
                     fontFamily: "'Fraunces', serif",
                     fontOpticalSizing: "auto",
                     fontWeight: 600,
                     fontSize: "clamp(1.5rem, 5vw, 2.75rem)",
-                  }}>
+                  }}
+                >
                   {s.value}
                 </p>
                 <p className="mt-1 text-xs sm:text-sm text-slate-500">
@@ -246,12 +251,13 @@ export default function TestimonialCarousel() {
           </div>
 
           <button
-          onClick={() =>
-    window.open(
-      "https://www.google.com/search?sca_esv=3926efc4ae7c8dc3&sxsrf=APpeQnv6lxE3Nuc5w-6f--gcR87hlbqh3Q:1783326023099&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_xiUktYNqhFFAEToXbnQTEpkbwZ8eHTUSzXMOydKjhVpQfhyJlY6XuCsY_MOCABU_7nHrp0yYmU32UsPCMv47NQoHQcL&q=FitMom+Club+Reviews&sa=X&ved=2ahUKEwjokYCRz72VAxVKbmwGHYncEIAQ0bkNegQILhAF&biw=1280&bih=551&dpr=1.5#lrd=0x3ba8f7ae88f23111:0x590c0b3b8586d660,1,,,,",
-      "_blank",
-      "noopener,noreferrer"
-    )}
+            onClick={() =>
+              window.open(
+                "https://www.google.com/search?sca_esv=3926efc4ae7c8dc3&sxsrf=APpeQnv6lxE3Nuc5w-6f--gcR87hlbqh3Q:1783326023099&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_xiUktYNqhFFAEToXbnQTEpkbwZ8eHTUSzXMOydKjhVpQfhyJlY6XuCsY_MOCABU_7nHrp0yYmU32UsPCMv47NQoHQcL&q=FitMom+Club+Reviews&sa=X&ved=2ahUKEwjokYCRz72VAxVKbmwGHYncEIAQ0bkNegQILhAF&biw=1280&bih=551&dpr=1.5#lrd=0x3ba8f7ae88f23111:0x590c0b3b8586d660,1,,,,",
+                "_blank",
+                "noopener,noreferrer"
+              )
+            }
             type="button"
             className="mt-9 inline-flex items-center gap-2 mr-4 rounded-full border border-teal-200 bg-white px-5 py-2.5 text-sm font-medium text-teal-800 shadow-sm hover:bg-teal-900 hover:text-white hover:border-teal-900 transition-colors"
           >
@@ -259,16 +265,17 @@ export default function TestimonialCarousel() {
             Share your story
           </button>
           <button
-          onClick={() =>
-    window.open(
-      "https://www.google.com/search?sca_esv=3926efc4ae7c8dc3&sxsrf=APpeQnv6lxE3Nuc5w-6f--gcR87hlbqh3Q:1783326023099&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_xiUktYNqhFFAEToXbnQTEpkbwZ8eHTUSzXMOydKjhVpQfhyJlY6XuCsY_MOCABU_7nHrp0yYmU32UsPCMv47NQoHQcL&q=FitMom+Club+Reviews&sa=X&ved=2ahUKEwjokYCRz72VAxVKbmwGHYncEIAQ0bkNegQILhAF&biw=1280&bih=551&dpr=1.5#lrd=0x3ba8f7ae88f23111:0x590c0b3b8586d660,1,,,,",
-      "_blank",
-      "noopener,noreferrer"
-    )}
+            onClick={() =>
+              window.open(
+                "https://www.google.com/search?sca_esv=3926efc4ae7c8dc3&sxsrf=APpeQnv6lxE3Nuc5w-6f--gcR87hlbqh3Q:1783326023099&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_xiUktYNqhFFAEToXbnQTEpkbwZ8eHTUSzXMOydKjhVpQfhyJlY6XuCsY_MOCABU_7nHrp0yYmU32UsPCMv47NQoHQcL&q=FitMom+Club+Reviews&sa=X&ved=2ahUKEwjokYCRz72VAxVKbmwGHYncEIAQ0bkNegQILhAF&biw=1280&bih=551&dpr=1.5#lrd=0x3ba8f7ae88f23111:0x590c0b3b8586d660,1,,,,",
+                "_blank",
+                "noopener,noreferrer"
+              )
+            }
             type="button"
             className="mt-9 inline-flex items-center gap-2 mr-4 rounded-full border border-teal-200 bg-white px-5 py-2.5 text-sm font-medium text-teal-800 shadow-sm hover:bg-teal-900 hover:text-white hover:border-teal-900 transition-colors"
           >
-            <BookOpenCheck  className="h-4 w-4" />
+            <BookOpenCheck className="h-4 w-4" />
             Read the reviews
           </button>
         </div>
@@ -276,12 +283,17 @@ export default function TestimonialCarousel() {
         {/* Rating summary */}
         <div className="mb-12 mx-auto grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-8 sm:gap-12 rounded-3xl border border-slate-100 bg-white px-6 py-8 sm:px-10 sm:max-w-3xl">
           <div className="flex sm:flex-col  items-center sm:items-start gap-4 sm:gap-2 sm:border-r sm:border-slate-100 sm:pr-12">
-            <p className="font-poppins text-5xl text-slate-900"  style={{
-                    fontFamily: "'Fraunces', serif",
-                    fontOpticalSizing: "auto",
-                    fontWeight: 600,
-                    fontSize: "clamp(2.5rem, 6vw, 3.75rem)",
-                  }}>4.7</p>
+            <p
+              className="font-poppins text-5xl text-slate-900"
+              style={{
+                fontFamily: "'Fraunces', serif",
+                fontOpticalSizing: "auto",
+                fontWeight: 600,
+                fontSize: "clamp(2.5rem, 6vw, 3.75rem)",
+              }}
+            >
+              4.7
+            </p>
             <div>
               <div className="flex gap-0.5 text-amber-400">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -460,7 +472,7 @@ export default function TestimonialCarousel() {
                 onClick={prev}
                 disabled={index === 0}
                 aria-label="Previous testimonials"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-white border border-slate-200 text-teal-900 shadow-sm hover:bg-teal-900 hover:text-white hover:border-teal-900 transition-colors disabled:opacity-30 disabled:pointer-events-none"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white border border-slate-200 text-teal-900 shadow-sm hover:bg-teal-900 hover:text-white hover:border-teal-900 transition-colors disabled:opacity-30 disabled:bg-slate-50 disabled:text-slate-300 disabled:hover:bg-slate-50 disabled:hover:text-slate-300 disabled:hover:border-slate-200 disabled:pointer-events-none disabled:cursor-not-allowed"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
@@ -469,7 +481,7 @@ export default function TestimonialCarousel() {
                 onClick={next}
                 disabled={index === maxIndex}
                 aria-label="Next testimonials"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-white border border-slate-200 text-teal-900 shadow-sm hover:bg-teal-900 hover:text-white hover:border-teal-900 transition-colors disabled:opacity-30 disabled:pointer-events-none"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white border border-slate-200 text-teal-900 shadow-sm hover:bg-teal-900 hover:text-white hover:border-teal-900 transition-colors disabled:opacity-30 disabled:bg-slate-50 disabled:text-slate-300 disabled:hover:bg-slate-50 disabled:hover:text-slate-300 disabled:hover:border-slate-200 disabled:pointer-events-none disabled:cursor-not-allowed"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>

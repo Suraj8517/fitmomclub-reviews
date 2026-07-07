@@ -19,14 +19,14 @@ import img17 from "../../assets/home/transformation/17.png"
 
 const allImages = [
   { name: "client1",   before: 74, after: 58, loss: 0, duration: "3 months", image: img1 },
-  { name: "client2",  before: 0, after: 0, loss: 0,  duration: "2 months", image: img2 },
+  { name: "client2",  before: 77, after: 63, loss: 0,  duration: "2 months", image: img2 },
   { name: "client3",   before: 80, after: 65, loss: 15, duration: "4 months", image: img3 },
   { name: "client4",   before: 85, after: 72, loss: 18, duration: "5 months", image: img4 },
-  { name: "client5", before: 0, after: 0, loss: 11, duration: "3 months", image: img5 },
+  { name: "client5", before: 75, after: 64, loss: 11, duration: "12 months", image: img5 },
   { name: "client6",   before: 92, after: 74, loss: 9,  duration: "2 months", image: img6 },
   { name: "client7",   before: 75, after: 70, loss: 14, duration: "4 months", image: img7 },
-  { name: "client8",  before: 0, after: 0, loss: 0, duration: "3 months", image: img8 },
-  { name: "client9",   before: 0, after: 0, loss: 0,  duration: "2 months", image: img9 },
+  { name: "client8",  before: 72, after: 62, loss: 10, duration: "3 months", image: img8 },
+  { name: "client9",   before: 64, after: 54, loss: 10,  duration: "2 months", image: img9 },
   { name: "client10",   before: 93, after: 61, loss: 20, duration: "6 months", image: img10 },
   { name: "client11",    before: 94, after: 87, loss: 8,  duration: "2 months", image: img11 },
   { name: "client12",   before: 66, after: 56, loss: 13, duration: "3 months", image: img12 },
@@ -72,11 +72,11 @@ export default function TransformationSection() {
   return (
     <section>
     <div
-      className="px-5 md:py-26 py-4 sm:px-10 md:px-16 lg:px-20 xl:px-24 2xl:px-32"
+      className="px-5 md:py-26 py-8 sm:px-10 md:px-16 lg:px-20 xl:px-24 2xl:px-32"
       style={{ fontFamily: "Poppins, sans-serif" }}
     >
       {/* Header */}
-      <div className="text-center mb-10 max-w-2xl mx-auto">
+      <div className="text-center my-10 max-w-2xl mx-auto">
         <p className="text-[10px] tracking-[0.2em] uppercase text-neutral-400 mb-2">
           Real results, real moms
         </p>
