@@ -172,9 +172,7 @@ export default function ProgramRatings() {
       <WaveClipDef />
 
       <div className="mx-auto max-w-3xl text-center">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-100 px-3.5 py-1.5 text-xs font-semibold text-teal-800">
-          Programs
-        </span>
+       
         <h2
           className="mt-4 text-3xl text-slate-900 sm:text-4xl"
           style={{

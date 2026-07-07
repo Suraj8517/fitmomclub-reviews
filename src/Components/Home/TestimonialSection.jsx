@@ -39,7 +39,7 @@ const ALL_TAGS = [
 
 const STATS = [
   { value: "3.3", label: "iOS App Store" },
-  { value: "4.7", label: "Google Playstore" },
+  { value: "4.7", label: "Google Play Store" },
   { value: "4.7", label: "Google" },
 ];
 
@@ -88,12 +88,7 @@ export default function TestimonialCarousel() {
     setIndex((i) => Math.min(i, maxIndex));
   }, [maxIndex]);
 
-  // Reset to the start whenever the filter changes.
-  // NOTE: we no longer wipe cardRefs.current entirely — the inline ref
-  // callbacks on each card already populate it correctly on every render.
-  // Clearing it here raced with that population (especially on mount),
-  // leaving cardRefs.current empty and silently breaking Next/Prev.
-  // We just trim any stale trailing entries from a longer previous list.
+
   useEffect(() => {
     cardRefs.current.length = filtered.length;
     setIndex(0);
@@ -147,10 +142,6 @@ export default function TestimonialCarousel() {
       <div className="mx-auto max-w-6xl">
         {/* Hero */}
         <div className="mb-6 px-6 py-12 sm:px-12 text-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-100 px-3.5 py-1.5 text-xs font-semibold text-teal-800">
-            <ShieldCheck className="h-3.5 w-3.5" />
-            Verified Member Reviews
-          </span>
 
           <h2 className="mt-5 font-poppins text-3xl sm:text-4xl text-slate-900">
             Real results from real women
