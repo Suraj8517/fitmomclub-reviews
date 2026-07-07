@@ -143,7 +143,7 @@ export default function TestimonialCarousel() {
   }, [maxIndex]);
 
   return (
-    <section className="w-full bg-white py-6 px-4 sm:px-8">
+    <section className="w-full bg-white py-2 px-4 sm:px-8">
       <div className="mx-auto max-w-6xl">
         {/* Hero */}
         <div className="mb-6 px-6 py-12 sm:px-12 text-center">
@@ -265,7 +265,7 @@ export default function TestimonialCarousel() {
               key={tag}
               type="button"
               onClick={() => setActiveTag(tag)}
-              className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+              className={`rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
                 activeTag === tag
                   ? "bg-teal-900 border-teal-900 text-white"
                   : "bg-white border-slate-200 text-slate-600 hover:border-teal-300 hover:text-teal-800"
