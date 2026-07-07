@@ -50,10 +50,10 @@ export default function CTASection({
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-6 px-6 sm:px-10 md:px-12 pt-12 sm:pt-14 md:pt-16 ">
             {/* Left CTA block */}
             <div className="flex flex-col items-center md:items-start text-center md:text-left">
-              <h3 className="text-xl sm:text-2xl font-semibold leading-snug text-neutral-900 max-w-xs font-[poppins]">
+              <h3 className="text-xl sm:text-3xl font-semibold leading-snug text-neutral-900 max-w-xs font-[poppins]">
                 {left.heading}
               </h3>
-              <p className="mt-2 text-base text-neutral-600 max-w-[20rem]">
+              <p className="mt-2 text-normal text-neutral-600 max-w-[20rem]">
                 {left.desc}
               </p>
               <button
@@ -67,10 +67,10 @@ export default function CTASection({
 
             {/* Right CTA block */}
             <div className="hidden sm:flex flex-col items-center md:items-end text-center md:text-right">
-              <h3 className="text-xl sm:text-2xl font-semibold leading-snug text-white max-w-xs">
+              <h3 className="text-xl sm:text-3xl font-semibold leading-snug text-white max-w-xs">
                 {right.heading}
               </h3>
-              <p className="mt-2 text-base text-white/70 max-w-[20rem]">
+              <p className="mt-2 text-normal text-white/70 max-w-[20rem]">
                 {right.desc}
               </p>
               <button

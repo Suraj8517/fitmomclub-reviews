@@ -7,7 +7,7 @@ const cardVideo4 = "https://res.cloudinary.com/q1vba78b/video/upload/v1783062401
 const cardVideo5 = "https://res.cloudinary.com/q1vba78b/video/upload/v1783398463/Video-409_vk8zri.mp4";
 const cardVideo6 = "https://res.cloudinary.com/q1vba78b/video/upload/v1783398430/Video-578_zhnmma.mp4";
 const cardVideo7 = "https://res.cloudinary.com/q1vba78b/video/upload/v1783398447/Video-878_oo3qlg.mp4";
-
+const cardVideo8 = "https://res.cloudinary.com/q1vba78b/video/upload/v1783072122/Legacy_Award_Client_testimonial_Video_1_1_hu2wxn.mp4";
 const CARDS = [
   { title: "FitMom Club Member's Journey", author: "FitMom Club Member", videoSrc: cardVideo1, titlePosition: "bottom" },
   { title: "17.6 kg down in 6 months", author: "FitMom Club Member", videoSrc: cardVideo2, titlePosition: "top" },
@@ -16,6 +16,7 @@ const CARDS = [
   { title: "Postpartum fitness journey", author: "FitMom Club Member", videoSrc: cardVideo5, titlePosition: "bottom" },
   { title: "Lost 7.5kg in 45 days", author: "FitMom Club Member", videoSrc: cardVideo6, titlePosition: "top" },
   { title: "FitMom Club Member's Journey", author: "FitMom Club Member", videoSrc: cardVideo7, titlePosition: "bottom" },
+  { title: "Lost 14kg", author: "FitMom Club Member", videoSrc: cardVideo8, titlePosition: "bottom" },
 ];
 
 function chunk(arr, size) {
