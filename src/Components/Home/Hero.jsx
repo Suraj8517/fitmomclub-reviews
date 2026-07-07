@@ -3,11 +3,12 @@ import heroimg1 from "../../assets/hero/NEW.png";
 import heroimg2 from "../../assets/hero/hero2.jpg";
 import bgImage from "../../assets/hero/bg.webp";
 import { ShieldCheck } from "lucide-react";
+import img1 from  "../../assets/home/avatars/1.png"
+import img2 from  "../../assets/home/avatars/2.png"
+import img3 from  "../../assets/home/avatars/3.png"
 
 const AVATARS = [
-  "https://i.pravatar.cc/64?img=32",
-  "https://i.pravatar.cc/64?img=12",
-  "https://i.pravatar.cc/64?img=47",
+  img1,img2,img3
 ];
 
 
@@ -36,7 +37,7 @@ export default function Hero() {
               className="relative pointer-events-none select-none sm:absolute inset-0 z-0 flex items-center justify-center overflow-visible"
             >
               <span
-                className="hidden sm:block absolute sm:static sm:top-2 -sm:left-5 whitespace-nowrap normal-case text-teal-900/10 text-[5rem] sm:text-[4.5rem] lg:text-[7.5rem] xl:text-[10rem] leading-none sm:-rotate-15
+                className="hidden sm:block absolute sm:static sm:top-2 -sm:left-5 whitespace-nowrap normal-case text-teal-900/10 text-[5rem] sm:text-[4.5rem] lg:text-[7.5rem] xl:text-[9.5rem] leading-none sm:-rotate-15
       origin-center"
                 style={{ fontFamily: "'Great Vibes', cursive" }}
               >
@@ -80,7 +81,9 @@ export default function Hero() {
 
           <div className="mt-8 lg:mt-10 flex items-center justify-center lg:justify-start gap-4 sm:gap-8 flex-wrap">
             <a
-              href="#"
+            target="_blank"
+  rel="noopener noreferrer"
+              href="https://forms.vmax.fit/vmaxwellness/form/FitmomclubEnquiryForm/formperma/2RPj9VElDPsF1Jl8AMdKUv4EHJ8EmOA17_9BCQkpUJI"
               className="bg-gradient-to-r from-teal-800 to-teal-600 hover:bg-gradient-to-r hover:from-emerald-900 hover:to-emerald-700 transition-colors text-white text-sm sm:text-base font-medium px-6 py-3 sm:px-8 sm:py-4 rounded-full"
             >
               Start your journey

@@ -9,14 +9,22 @@ export default function CTASection({
   left= {
     heading: "Have you been a FitMom Club member?",
     ctaLabel: "Write a Google Review",
-    onClick: () => {},
+    onClick: () => {window.open(
+                "https://www.google.com/search?sca_esv=3926efc4ae7c8dc3&sxsrf=APpeQnv6lxE3Nuc5w-6f--gcR87hlbqh3Q:1783326023099&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_xiUktYNqhFFAEToXbnQTEpkbwZ8eHTUSzXMOydKjhVpQfhyJlY6XuCsY_MOCABU_7nHrp0yYmU32UsPCMv47NQoHQcL&q=FitMom+Club+Reviews&sa=X&ved=2ahUKEwjokYCRz72VAxVKbmwGHYncEIAQ0bkNegQILhAF&biw=1280&bih=551&dpr=1.5#lrd=0x3ba8f7ae88f23111:0x590c0b3b8586d660,1,,,,",
+                "_blank",
+                "noopener,noreferrer"
+              )},
     desc:"Your review helps other women decide. Takes less than two minutes."
   },
 
   right= {
     heading: "New to FitMom Club?",
     ctaLabel: "Start Your Journey",
-    onClick: () => {},
+    onClick: () => {window.open(
+                "https://forms.vmax.fit/vmaxwellness/form/FitmomclubEnquiryForm/formperma/2RPj9VElDPsF1Jl8AMdKUv4EHJ8EmOA17_9BCQkpUJI",
+                "_blank",
+                "noopener,noreferrer"
+              )},
     desc: "Join our community of empowered women and start your fitness journey today."
   },
 }) {
