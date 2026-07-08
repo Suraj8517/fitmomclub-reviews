@@ -9,13 +9,13 @@ const cardVideo6 = "https://res.cloudinary.com/q1vba78b/video/upload/v1783398430
 const cardVideo7 = "https://res.cloudinary.com/q1vba78b/video/upload/v1783398447/Video-878_oo3qlg.mp4";
 const cardVideo8 = "https://res.cloudinary.com/q1vba78b/video/upload/v1783072122/Legacy_Award_Client_testimonial_Video_1_1_hu2wxn.mp4";
 const CARDS = [
-  { title: "FitMom Club Member's Journey", author: "FitMom Club Member", videoSrc: cardVideo1, titlePosition: "bottom" },
+  { title: "FitMom Club Member's Journey", author: "", videoSrc: cardVideo1, titlePosition: "bottom" },
   { title: "17.6 kg down in 6 months", author: "FitMom Club Member", videoSrc: cardVideo2, titlePosition: "top" },
   { title: "Lost 5kg in 3 months", author: "FitMom Club Member", videoSrc: cardVideo3, titlePosition: "bottom" },
   { title: "Lost 10kg", author: "FitMom Club Member", videoSrc: cardVideo4, titlePosition: "top" },
   { title: "Postpartum fitness journey", author: "FitMom Club Member", videoSrc: cardVideo5, titlePosition: "bottom" },
   { title: "Lost 7.5kg in 45 days", author: "FitMom Club Member", videoSrc: cardVideo6, titlePosition: "top" },
-  { title: "FitMom Club Member's Journey", author: "FitMom Club Member", videoSrc: cardVideo7, titlePosition: "bottom" },
+  { title: "FitMom Club Member's Journey", author: "", videoSrc: cardVideo7, titlePosition: "bottom" },
   { title: "Lost 14kg", author: "FitMom Club Member", videoSrc: cardVideo8, titlePosition: "bottom" },
 ];
 
@@ -69,11 +69,7 @@ function VideoLoader() {
   );
 }
 
-// Injects a Cloudinary transformation string right after "/upload/" in the URL.
-// q_auto = automatic quality/bitrate compression
-// f_auto = serves webm/vp9 to browsers that support it instead of always mp4/h264
-// w_500  = caps the width (these render at a few hundred px on screen, no need for 1080px source)
-function optimizeCloudinaryUrl(url, transformation = "q_auto,f_auto,w_500") {
+function optimizeCloudinaryUrl(url, transformation = "q_auto,f_mp4,w_500") {
   if (!url || !url.includes("/upload/")) return url;
   return url.replace("/upload/", `/upload/${transformation}/`);
 }
@@ -145,7 +141,10 @@ function MediaCard({ card, className = "" }) {
                 preload="auto"
                 onCanPlay={() => setIsLoaded(true)}
                 onLoadedData={() => setIsLoaded(true)}
-                onError={() => setHasError(true)}
+                onError={(e) => {
+                  console.error("Video failed to load:", optimizedSrc, e.target.error);
+                  setHasError(true);
+                }}
               />
             )
           )}
