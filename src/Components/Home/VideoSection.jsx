@@ -84,8 +84,7 @@ function MediaCard({ card, className = "" }) {
 
   const optimizedSrc = optimizeCloudinaryUrl(card.videoSrc);
 
-  // Only start fetching the video once the card is close to entering view,
-  // instead of every card on the page loading at once.
+ 
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -106,10 +105,7 @@ function MediaCard({ card, className = "" }) {
     return () => observer.disconnect();
   }, []);
 
-  // In case the video is already cached/ready by the time this mounts
-  // (readyState >= 3 means enough data buffered to play a bit),
-  // make sure we don't get stuck showing the loader forever.
-  useEffect(() => {
+   useEffect(() => {
     const el = videoRef.current;
     if (el && el.readyState >= 3) {
       setIsLoaded(true);
@@ -244,7 +240,7 @@ export default function VideoSection() {
             <br />
             <span className="text-teal-700">from members</span>
           </h1>
-          <div className="lg:pt-4 sm:pl-22">
+          <div className="lg:pt-4 lg:pl-22">
             <p className="text-slate-500 text-base leading-relaxed max-w-lg text-center sm:text-left">
               Real experiences from FitMom Club members, sharing their challenges, small wins, and
               transformations to inspire and support others on their fitness journey.
