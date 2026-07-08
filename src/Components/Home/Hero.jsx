@@ -83,7 +83,7 @@ Verified Member Reviews
             <a
             target="_blank"
   rel="noopener noreferrer"
-              href="https://forms.vmax.fit/vmaxwellness/form/FitmomclubEnquiryForm/formperma/2RPj9VElDPsF1Jl8AMdKUv4EHJ8EmOA17_9BCQkpUJI"
+              href="https://zfrmz.in/6NcB2F4HpHEkGk3vrkIj"
               className="bg-gradient-to-r from-teal-800 to-teal-600 hover:bg-gradient-to-r hover:from-emerald-900 hover:to-emerald-700 transition-colors text-white text-sm sm:text-base font-medium px-6 py-3 sm:px-8 sm:py-4 rounded-full"
             >
               Start your journey

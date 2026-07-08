@@ -21,7 +21,7 @@ export default function CTASection({
     heading: "New to FitMom Club?",
     ctaLabel: "Start Your Journey",
     onClick: () => {window.open(
-                "https://forms.vmax.fit/vmaxwellness/form/FitmomclubEnquiryForm/formperma/2RPj9VElDPsF1Jl8AMdKUv4EHJ8EmOA17_9BCQkpUJI",
+                "https://zfrmz.in/6NcB2F4HpHEkGk3vrkIj",
                 "_blank",
                 "noopener,noreferrer"
               )},
