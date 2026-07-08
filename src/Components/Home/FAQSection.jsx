@@ -22,17 +22,17 @@ const FAQS = [
   {
     question: "Can I join from outside India?",
     answer:
-      "Yes — members are spread across 38+ countries. Coaching happens over WhatsApp and video call, and your plan adapts to what's available where you live.",
+      "Yes, Members are spread across 70+ countries. Coaching happens over WhatsApp and video call, and your plan adapts to what's available where you live.",
   },
   {
     question: "What plans do you offer?",
     answer:
-      "New Bee, PRO, Elite, Blossom, and Miracle — each for a different level of support and goal. Your coach recommends the right one on your first call.",
+      "PRO, Elite, Blossom, and Queen, each for a different level of support and goal. Your coach recommends the right one on your first call.",
   },
   {
     question: "Is FitMom Club only for mothers?",
     answer:
-      "No — despite the name, it serves all women: students, working professionals, and mothers alike.",
+      "No, despite the name, it serves all women: students, working professionals, and mothers alike.",
   },
 ];
 

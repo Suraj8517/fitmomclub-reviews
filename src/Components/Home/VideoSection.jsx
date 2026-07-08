@@ -61,23 +61,98 @@ function NavButton({ direction, onClick, disabled }) {
   );
 }
 
+function VideoLoader() {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center bg-slate-200">
+      <div className="w-8 h-8 rounded-full border-2 border-slate-400/40 border-t-slate-600 animate-spin" />
+    </div>
+  );
+}
+
+// Injects a Cloudinary transformation string right after "/upload/" in the URL.
+// q_auto = automatic quality/bitrate compression
+// f_auto = serves webm/vp9 to browsers that support it instead of always mp4/h264
+// w_500  = caps the width (these render at a few hundred px on screen, no need for 1080px source)
+function optimizeCloudinaryUrl(url, transformation = "q_auto,f_auto,w_500") {
+  if (!url || !url.includes("/upload/")) return url;
+  return url.replace("/upload/", `/upload/${transformation}/`);
+}
+
 function MediaCard({ card, className = "" }) {
   const overlayPosition = card.titlePosition === "top" ? "top-6 items-start" : "bottom-6 items-end";
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false); // becomes true once near viewport
+  const videoRef = useRef(null);
+  const containerRef = useRef(null);
+
+  const optimizedSrc = optimizeCloudinaryUrl(card.videoSrc);
+
+  // Only start fetching the video once the card is close to entering view,
+  // instead of every card on the page loading at once.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setShouldLoad(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: "300px" } // start loading a bit before it scrolls into view
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // In case the video is already cached/ready by the time this mounts
+  // (readyState >= 3 means enough data buffered to play a bit),
+  // make sure we don't get stuck showing the loader forever.
+  useEffect(() => {
+    const el = videoRef.current;
+    if (el && el.readyState >= 3) {
+      setIsLoaded(true);
+    }
+  }, [shouldLoad]);
 
   return (
-    <div className={`relative rounded-3xl overflow-hidden bg-slate-200 aspect-[9/16] ${className}`}>
+    <div ref={containerRef} className={`relative rounded-3xl overflow-hidden bg-slate-200 aspect-[9/16] ${className}`}>
       {card.videoSrc ? (
-        <video
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-          src={card.videoSrc}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
+        <>
+          {!isLoaded && !hasError && <VideoLoader />}
+
+          {hasError ? (
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-300 to-slate-400 flex items-center justify-center text-slate-500 text-sm text-center px-4">
+              Video unavailable
+            </div>
+          ) : (
+            shouldLoad && (
+              <video
+                ref={videoRef}
+                className={`absolute inset-0 w-full h-full object-cover pointer-events-none transition-opacity duration-500 ${
+                  isLoaded ? "opacity-100" : "opacity-0"
+                }`}
+                src={optimizedSrc}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                onCanPlay={() => setIsLoaded(true)}
+                onLoadedData={() => setIsLoaded(true)}
+                onError={() => setHasError(true)}
+              />
+            )
+          )}
+        </>
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-slate-300 to-slate-400 flex items-center justify-center text-slate-500 text-sm">
-          Add video
+          FMC transformations
         </div>
       )}
 
@@ -85,8 +160,8 @@ function MediaCard({ card, className = "" }) {
 
       <div className={`absolute inset-x-5 flex justify-between gap-3 ${overlayPosition}`}>
         <div>
-          <p className="text-white font-medium leading-snug">{card.title}</p>
-          <p className="text-white/70 text-sm mt-0.5">{card.author}</p>
+          <p className="text-white font-medium leading-snug hidden sm:block">{card.title}</p>
+          <p className="text-white/70 text-sm mt-0.5 hidden sm:block">{card.author}</p>
         </div>
       </div>
     </div>
